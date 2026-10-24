@@ -499,11 +499,11 @@
   });
 
   /* 6. Karty projektów (AIQ, Algorytm w todze, HIL): dryfujące neurony łączące się w sieć,
-        opcjonalnie z jednym symbolem kreślonym linią w środku (waga, zamek) */
+        opcjonalnie z symbolem w środku: obracający się posąg Temidy (themis) albo napis HISTORY z neuronów (history) */
   const symbols = {
     // Temida: posąg obrócony z profilu (popiersie: głowa, szyja, ramiona, toga) jako chmura neuronów
     // z siatką, obraca się wokół osi, punkty pulsują, fala rozjaśnienia przechodzi od dołu do góry;
-    // przepaska to jaśniejszy pierścień, obok w dłoni waga
+    // przepaska to jaśniejszy pierścień
     themis(ctx, cx, cy, S, t, rgb, live, s) {
       if (!s.th) {
         const prof = (y) => {
@@ -584,7 +584,7 @@
         });
         s.hist = { pts };
         // po doładowaniu fontu Tinos przebuduj napis raz
-        if (!s.histFonts && document.fonts) { s.histFonts = true; document.fonts.ready.then(() => { s.hist = null; }); }
+        if (!s.histFonts && document.fonts) { s.histFonts = true; document.fonts.ready.then(() => { s.hist = null; document.dispatchEvent(new Event("kk-theme")); }); }
       }
       const { pts } = s.hist, sc = S * 1.9;
       const X = (p) => cx + p.u * sc, Y = (p) => cy + p.v * sc;
