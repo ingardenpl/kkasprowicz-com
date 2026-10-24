@@ -572,6 +572,7 @@
     // Sokrates w Akademii Platońskiej: kolumnada z frontonem i schodami, Sokrates siedzi z uniesioną
     // dłonią w geście rozmowy, naprzeciw dwóch słuchaczy; z jego głowy unoszą się impulsy myśli
     academy(ctx, cx, cy, S, t, rgb, live) {
+      cy -= S * 0.12; // scena jest szeroka i niska — wyżej, żeby na telefonie nie wchodziła pod tytuł
       ctx.strokeStyle = `rgba(${rgb},.85)`; ctx.lineWidth = 1.3; ctx.lineCap = "round"; ctx.lineJoin = "round";
       const base = cy + S * 0.32, top = cy - S * 0.26;
       ctx.beginPath();
