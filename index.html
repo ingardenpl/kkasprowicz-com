@@ -22,8 +22,8 @@
 <script>try{var d=document.documentElement,t=localStorage.getItem("kk-theme"),l=localStorage.getItem("kk-lang")||"en";d.dataset.theme=t||"dark";d.dataset.lang=l;d.lang=l;d.classList.toggle("is-light",t==="light")}catch(e){d.dataset.theme="dark";d.dataset.lang="en";d.lang="en"}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Tinos:ital,wght@0,400;0,700;1,400&display=swap">
-<link rel="stylesheet" href="css/style.css?v=57">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Tinos:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,900;1,700&family=Source+Sans+3:wght@600&display=swap">
+<link rel="stylesheet" href="css/style.css?v=58">
 </head>
 <body>
 <a class="skip" href="#main"><span data-l="pl" lang="pl">Przejdź do treści</span><span data-l="en" lang="en">Skip to content</span></a>
@@ -195,6 +195,57 @@
       </div>
 
       <div class="panel" role="tabpanel" id="p-ib" aria-labelledby="t-ib" tabindex="0" hidden>
+        <a class="ib-banner" href="https://kkasprowicz.com/m28/" aria-label="IB DP History M28 — strona kursu (logowanie dla uczniów)" data-aria-pl="IB DP History M28 — strona kursu (logowanie dla uczniów)" data-aria-en="IB DP History M28 — course website (student sign-in)">
+          <svg viewBox="0 0 1200 340" preserveAspectRatio="xMidYMid slice" role="img" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="ibPaper" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFCF5"/><stop offset="1" stop-color="#EFE6D3"/></linearGradient>
+              <linearGradient id="ibWave" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#1F2A44"/><stop offset="1" stop-color="#1F2A44" stop-opacity=".35"/></linearGradient>
+              <pattern id="ibGrain" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".6" fill="#2A2118" fill-opacity=".05"/></pattern>
+            </defs>
+            <rect width="1200" height="340" fill="url(#ibPaper)"/>
+            <rect width="1200" height="340" fill="url(#ibGrain)"/>
+            <!-- czerwone słońce -->
+            <circle class="ib-sun" cx="300" cy="118" r="54" fill="#A31919" fill-opacity=".92"/>
+            <!-- wielka fala (nawiązanie do Hokusaia), granat -->
+            <g class="ib-wave" fill="none" stroke="#1F2A44" stroke-width="2.2" stroke-linecap="round">
+              <path d="M-20 262 C80 262 120 190 190 192 C240 194 250 150 320 150 C370 150 385 112 430 112 C455 112 468 128 466 142 C462 160 436 164 428 150" stroke-opacity=".9"/>
+              <path d="M-20 290 C90 290 130 232 200 232 C260 232 280 196 340 196 C390 196 410 172 450 172" stroke-opacity=".55"/>
+              <path d="M-20 316 C110 316 150 268 220 268 C290 268 320 240 390 240 C430 240 450 224 480 226" stroke-opacity=".35"/>
+              <path d="M428 150 C418 156 404 150 402 140 M466 142 C470 134 462 126 452 128" stroke-opacity=".9"/>
+            </g>
+            <path d="M-20 340 L-20 262 C80 262 120 190 190 192 C240 194 250 150 320 150 C370 150 385 112 430 112 L430 340 Z" fill="url(#ibWave)" opacity=".10"/>
+            <!-- wieża Kremla z gwiazdą, bordo -->
+            <g class="ib-tower" fill="none" stroke="#A31919" stroke-width="2" stroke-linejoin="round">
+              <path d="M1010 340 V214 H1066 V340"/>
+              <path d="M1002 214 H1074 M1010 214 V200 H1024 V214 M1038 214 V200 H1052 V214 M1066 214 V200 H1074 V214"/>
+              <path d="M1018 200 L1038 118 L1058 200 Z"/>
+              <path d="M1038 118 V96"/>
+              <path d="M1038 76 L1043 88 L1056 89 L1046 97 L1049 110 L1038 103 L1027 110 L1030 97 L1020 89 L1033 88 Z" fill="#A31919" stroke="none"/>
+              <rect x="1030" y="248" width="16" height="26" rx="8"/><rect x="1030" y="292" width="16" height="26" rx="8"/>
+            </g>
+            <!-- oś czasu -->
+            <g font-family="'Source Sans 3','Source Sans Pro',Inter,system-ui,sans-serif" font-size="15" font-weight="600" fill="#6C604E" letter-spacing="2">
+              <line x1="560" y1="262" x2="980" y2="262" stroke="#B9AD94" stroke-width="1.5"/>
+              <g fill="#8C1C28"><circle cx="560" cy="262" r="4"/><circle cx="700" cy="262" r="4"/><circle cx="840" cy="262" r="4"/><circle cx="980" cy="262" r="4"/></g>
+              <circle class="ib-dot" cx="560" cy="262" r="7" fill="#8C1C28" fill-opacity=".35"/>
+              <g class="ib-lab"><text x="560" y="292" text-anchor="middle">1853</text><text x="700" y="292" text-anchor="middle">1917</text><text x="840" y="292" text-anchor="middle">1945</text><text x="980" y="292" text-anchor="middle">2020</text></g>
+            </g>
+            <!-- tytuł -->
+            <g font-family="'Playfair Display',Georgia,'Times New Roman',serif" fill="#2A2118">
+              <text x="560" y="128" font-size="72" font-weight="900" letter-spacing="-1">IB DP <tspan font-weight="700" font-style="italic">History</tspan></text>
+              <text class="ib-sub" x="562" y="172" font-size="24" font-weight="700" fill="#A31919">Class M28 · new programme</text>
+              <text class="ib-sub" x="562" y="202" font-size="24" font-weight="700" fill="#A31919">first examination May 2028</text>
+            </g>
+            <g class="ib-lab" font-family="'Source Sans 3','Source Sans Pro',Inter,system-ui,sans-serif" font-size="17" font-weight="600" fill="#6C604E" letter-spacing="2">
+              <text x="562" y="234" data-l="pl" lang="pl">KURS DLA UCZNIÓW · PADEREWSKI · LUBLIN</text>
+              <text x="562" y="234" data-l="en" lang="en">STUDENT COURSE · PADEREWSKI · LUBLIN</text>
+            </g>
+            <rect x="0" y="0" width="1200" height="340" fill="none" stroke="#DDD2BC" stroke-width="2"/>
+            <g transform="translate(1110,60)"><rect x="0" y="0" width="56" height="56" rx="4" fill="#A31919"/><rect x="4" y="4" width="48" height="48" rx="2" fill="none" stroke="#FBF6EE" stroke-width="1.5" stroke-opacity=".8"/><text x="28" y="36" text-anchor="middle" font-family="'Playfair Display',Georgia,serif" font-size="20" font-weight="900" fill="#FBF6EE">M28</text></g>
+            <rect x="0" y="332" width="400" height="8" fill="#14544A"/><rect x="400" y="332" width="400" height="8" fill="#F3EBD8"/><rect x="800" y="332" width="400" height="8" fill="#A31919"/>
+          </svg>
+          <span class="ib-banner-cta"><span data-l="pl" lang="pl">Otwórz kurs</span><span data-l="en" lang="en">Open the course</span> <span aria-hidden="true">↗</span></span>
+        </a>
         <p class="panel-lede"><span data-l="pl" lang="pl">Międzynarodowe Liceum Paderewski w Lublinie — kursy IB Diploma Programme i Middle Years Programme History. W kursie DP równolegle działają dwa programy: przewodnik z 2020 roku (ostatnie egzaminy w 2027) i nowy przewodnik od rocznika M28.</span><span data-l="en" lang="en">Paderewski International High School, Lublin — IB Diploma Programme and Middle Years Programme History. Two DP programmes run side by side: the 2020 guide (final exams in 2027) and the new guide from the M28 cohort onwards.</span></p>
 
         <article class="track track-new" id="ib-m28" aria-labelledby="ib-m28-h">
@@ -434,7 +485,7 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=57" defer></script>
-<script src="js/fx.js?v=57" defer></script>
+<script src="js/main.js?v=58" defer></script>
+<script src="js/fx.js?v=58" defer></script>
 </body>
 </html>
