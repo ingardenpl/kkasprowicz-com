@@ -561,66 +561,46 @@
         ctx.beginPath(); ctx.arc(x, y, r, 0, 6.283); ctx.fill();
       }
       ctx.globalAlpha = 1;
-      // waga w uniesionej dłoni (obraca się razem z posągiem)
-      const H = P({ x: 0.5, y: 0.3, z: 0.18 }), L = 0.26, sway = live ? 0.05 * Math.sin(t * 0.9) : 0;
-      const E1 = P({ x: 0.5, y: 0.3 - sway, z: 0.18 + L }), E2 = P({ x: 0.5, y: 0.3 + sway, z: 0.18 - L });
-      ctx.strokeStyle = `rgba(${rgb},.9)`; ctx.lineWidth = 1.3; ctx.lineCap = "round";
-      ctx.beginPath(); ctx.moveTo(E1[0], E1[1]); ctx.lineTo(E2[0], E2[1]); ctx.stroke();
-      for (const E of [E1, E2]) {
-        const d = S * 0.16, w = S * 0.07;
-        ctx.beginPath(); ctx.moveTo(E[0], E[1]); ctx.lineTo(E[0] - w, E[1] + d); ctx.moveTo(E[0], E[1]); ctx.lineTo(E[0] + w, E[1] + d); ctx.moveTo(E[0], E[1]); ctx.lineTo(E[0], E[1] + d); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(E[0] - w * 1.2, E[1] + d); ctx.quadraticCurveTo(E[0], E[1] + d + w, E[0] + w * 1.2, E[1] + d); ctx.stroke();
-      }
-      ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(H[0], H[1], 2.4, 0, 6.283); ctx.fill();
     },
-    // Sokrates w Akademii Platońskiej: kolumnada z frontonem i schodami, Sokrates siedzi z uniesioną
-    // dłonią w geście rozmowy, naprzeciw dwóch słuchaczy; z jego głowy unoszą się impulsy myśli
-    academy(ctx, cx, cy, S, t, rgb, live) {
-      cy -= S * 0.12; // scena jest szeroka i niska — wyżej, żeby na telefonie nie wchodziła pod tytuł
-      ctx.strokeStyle = `rgba(${rgb},.85)`; ctx.lineWidth = 1.3; ctx.lineCap = "round"; ctx.lineJoin = "round";
-      const base = cy + S * 0.32, top = cy - S * 0.26;
-      ctx.beginPath();
-      // schody
-      for (let i = 0; i < 3; i++) { const y = base + i * S * 0.05, w = S * (0.78 + i * 0.07); ctx.moveTo(cx - w, y); ctx.lineTo(cx + w, y); }
-      // kolumny z kapitelami
-      for (let i = -2; i <= 2; i++) {
-        const x = cx + i * S * 0.34, w = S * 0.03;
-        ctx.moveTo(x - w, base); ctx.lineTo(x - w, top + S * 0.05); ctx.moveTo(x + w, base); ctx.lineTo(x + w, top + S * 0.05);
-        ctx.moveTo(x - w * 1.8, top + S * 0.05); ctx.lineTo(x + w * 1.8, top + S * 0.05); ctx.moveTo(x - w * 1.8, top + S * 0.02); ctx.lineTo(x + w * 1.8, top + S * 0.02);
-      }
-      // belkowanie i fronton
-      ctx.moveTo(cx - S * 0.76, top + S * 0.02); ctx.lineTo(cx + S * 0.76, top + S * 0.02);
-      ctx.moveTo(cx - S * 0.76, top - S * 0.04); ctx.lineTo(cx + S * 0.76, top - S * 0.04);
-      ctx.moveTo(cx - S * 0.8, top - S * 0.04); ctx.lineTo(cx, top - S * 0.24); ctx.lineTo(cx + S * 0.8, top - S * 0.04);
-      ctx.stroke();
-      // Sokrates (siedzi po lewej, zwrócony w prawo) — głowa, broda, himation, uniesiona dłoń
-      const sx = cx - S * 0.22, sy = base - S * 0.02, h = S * 0.3;
-      ctx.beginPath();
-      ctx.arc(sx, sy - h * 0.82, h * 0.1, 0, 6.283);
-      ctx.moveTo(sx + h * 0.04, sy - h * 0.72); ctx.quadraticCurveTo(sx + h * 0.06, sy - h * 0.58, sx - h * 0.05, sy - h * 0.6); // broda
-      ctx.moveTo(sx - h * 0.1, sy - h * 0.66); ctx.quadraticCurveTo(sx - h * 0.26, sy - h * 0.5, sx - h * 0.3, sy); ctx.lineTo(sx + h * 0.34, sy); ctx.quadraticCurveTo(sx + h * 0.3, sy - h * 0.46, sx + h * 0.1, sy - h * 0.66); // himation
-      ctx.moveTo(sx + h * 0.12, sy - h * 0.42); ctx.quadraticCurveTo(sx + h * 0.3, sy - h * 0.5, sx + h * 0.44, sy - h * 0.74); // uniesione ramię
-      ctx.moveTo(sx + h * 0.44, sy - h * 0.74); ctx.lineTo(sx + h * 0.5, sy - h * 0.86); ctx.moveTo(sx + h * 0.44, sy - h * 0.74); ctx.lineTo(sx + h * 0.52, sy - h * 0.72); // dłoń
-      ctx.stroke();
-      // słuchacze (siedzą po prawej, zwróceni w lewo)
-      for (const [lx, sc] of [[cx + S * 0.18, 0.8], [cx + S * 0.38, 0.72]]) {
-        const hh = h * sc;
-        ctx.beginPath();
-        ctx.arc(lx, sy - hh * 0.8, hh * 0.09, 0, 6.283);
-        ctx.moveTo(lx + hh * 0.1, sy - hh * 0.64); ctx.quadraticCurveTo(lx + hh * 0.26, sy - hh * 0.46, lx + hh * 0.28, sy); ctx.lineTo(lx - hh * 0.3, sy); ctx.quadraticCurveTo(lx - hh * 0.26, sy - hh * 0.44, lx - hh * 0.1, sy - hh * 0.64);
-        ctx.stroke();
-      }
-      // impulsy myśli unoszące się z głowy Sokratesa w sieć
-      if (live) {
-        for (let i = 0; i < 3; i++) {
-          const k = ((t * 0.25 + i / 3) % 1), x = sx + Math.sin(k * 6 + i) * S * 0.05, y = sy - h * 0.95 - k * S * 0.5;
-          ctx.globalAlpha = 0.8 * Math.sin(k * Math.PI);
-          ctx.drawImage(glow(false), x - 5, y - 5, 10, 10);
+    // HISTORY: napis spróbkowany na punkty-neurony, które pulsują, mienią się przebiegającą falą
+    // i łączą cienkimi liniami z sąsiadami
+    history(ctx, cx, cy, S, t, rgb, live, s) {
+      if (!s.hist) {
+        const oc = document.createElement("canvas"), W = 480, H = 110, STEP = 4;
+        oc.width = W; oc.height = H;
+        const g = oc.getContext("2d", { willReadFrequently: true });
+        g.fillStyle = "#fff"; g.font = "700 96px Tinos, Georgia, 'Times New Roman', serif"; g.textAlign = "center"; g.textBaseline = "middle";
+        g.fillText("HISTORY", W / 2, H / 2 + 4);
+        const px = g.getImageData(0, 0, W, H).data, pts = [], cell = new Map();
+        for (let y = 0; y < H; y += STEP) for (let x = 0; x < W; x += STEP) {
+          if (px[(y * W + x) * 4 + 3] < 120) continue;
+          cell.set(x + "," + y, pts.length);
+          pts.push({ u: (x - W / 2) / W, v: (y - H / 2) / W, ph: Math.random() * 6.283, nb: [] });
         }
-        ctx.globalAlpha = 0.6 + 0.4 * Math.sin(t * 2);
-        ctx.drawImage(glow(false), sx - 7, sy - h * 0.82 - 7, 14, 14);
-        ctx.globalAlpha = 1;
+        pts.forEach((p) => {
+          const x = Math.round(p.u * W + W / 2), y = Math.round(p.v * W + H / 2);
+          const r = cell.get((x + STEP) + "," + y), dn = cell.get(x + "," + (y + STEP));
+          if (r !== undefined) p.nb.push(r); if (dn !== undefined) p.nb.push(dn);
+        });
+        s.hist = { pts };
+        // po doładowaniu fontu Tinos przebuduj napis raz
+        if (!s.histFonts && document.fonts) { s.histFonts = true; document.fonts.ready.then(() => { s.hist = null; }); }
       }
+      const { pts } = s.hist, sc = S * 1.9;
+      const X = (p) => cx + p.u * sc, Y = (p) => cy + p.v * sc;
+      const wave = live ? ((t * 0.25) % 1.6) - 0.8 : 9;
+      ctx.lineWidth = 0.7; ctx.strokeStyle = `rgba(${rgb},.28)`;
+      ctx.beginPath();
+      for (const p of pts) for (const j of p.nb) { ctx.moveTo(X(p), Y(p)); ctx.lineTo(X(pts[j]), Y(pts[j])); }
+      ctx.stroke();
+      ctx.fillStyle = `rgb(${rgb})`;
+      for (const p of pts) {
+        const k = 0.5 + 0.5 * Math.sin(t * 1.8 + p.ph), w = Math.exp(-((p.u - wave) ** 2) / 0.006);
+        ctx.globalAlpha = Math.min(1, 0.3 + 0.45 * k + 0.6 * w);
+        const r = 1.1 + 0.8 * k + 1.2 * w;
+        ctx.beginPath(); ctx.arc(X(p), Y(p), r, 0, 6.283); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
     },
   };
   function neuronCard(id, symbol) {
@@ -679,7 +659,7 @@
   }
   neuronCard("aiqFx");
   neuronCard("togaFx", "themis");
-  neuronCard("hilFx", "academy");
+  neuronCard("hilFx", "history");
 
   // Linie energii w SVG (CSS) — pauza poza ekranem
   const flow = document.querySelector(".flow");
