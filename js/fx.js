@@ -518,7 +518,7 @@
     },
     // zamek: okrągła wieża-donżon z blankami i kaplica z dwuspadowym dachem, unoszące się jak hologram, z linią skanu
     castle(ctx, cx, cy, S, t, rgb, live) {
-      const y0 = cy + S * 0.36 + (live ? Math.sin(t * 0.7) * S * 0.02 : 0);
+      const y0 = cy + S * 0.3 + (live ? Math.sin(t * 0.7) * S * 0.02 : 0);
       ctx.strokeStyle = `rgba(${rgb},.9)`; ctx.lineWidth = 1.4; ctx.lineCap = "round"; ctx.lineJoin = "round";
       const tw = S * 0.22, th = S * 0.62, tx = cx - S * 0.3;
       ctx.beginPath();
@@ -548,7 +548,8 @@
       // obszar sieci: prawa część karty (na telefonie cała szerokość, górna część)
       s.x0 = mobile ? 0 : w * 0.38; s.x1 = w; s.y0 = 0; s.y1 = mobile ? h * 0.62 : h;
       s.link = Math.min(140, Math.max(90, (s.x1 - s.x0) / 5));
-      s.S = Math.min((s.y1 - s.y0) * 0.6, (s.x1 - s.x0) * 0.36);
+      s.S = Math.min((s.y1 - s.y0) * (mobile ? 0.5 : 0.6), (s.x1 - s.x0) * 0.36);
+      s.cy = s.y0 + (s.y1 - s.y0) * (mobile ? 0.38 : 0.5);
     }, (ctx, s, w, h, t) => {
       ctx.clearRect(0, 0, w, h);
       const light = root.classList.contains("is-light");
@@ -588,7 +589,7 @@
         if (p.r > 2.3) { ctx.globalAlpha = 0.35 + 0.45 * k; ctx.drawImage(sprite, p.x - 7, p.y - 7, 14, 14); }
       }
       ctx.globalAlpha = 1;
-      if (symbol) symbols[symbol](ctx, s.x0 + W * 0.5, s.y0 + H * 0.5, s.S, t, rgb, live);
+      if (symbol) symbols[symbol](ctx, s.x0 + W * 0.5, s.cy, s.S, t, rgb, live);
       ctx.globalCompositeOperation = "source-over";
     });
   }
