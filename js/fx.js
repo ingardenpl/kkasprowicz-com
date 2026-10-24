@@ -499,56 +499,102 @@
     ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over";
   });
 
-  /* 6. Neurony AIQ — tło karty „AIQ. Edukacja…”: same dryfujące neurony, które łączą się w sieć, gdy są blisko */
-  scene(document.getElementById("aiqFx"), (s, w, h) => {
-    const mobile = w < 700;
-    const n = mobile ? 34 : 58;
-    if (!s.nodes || s.nodes.length !== n) {
-      s.nodes = Array.from({ length: n }, () => ({ u: Math.random(), v: Math.random(), vx: (Math.random() - 0.5) * 0.16, vy: (Math.random() - 0.5) * 0.16, r: 1 + Math.random() * 1.8, ph: Math.random() * 6.283 }));
-    }
-    // obszar sieci: prawa część karty (na telefonie cała szerokość, górna część)
-    s.x0 = mobile ? 0 : w * 0.38; s.x1 = w; s.y0 = 0; s.y1 = mobile ? h * 0.62 : h;
-    s.link = Math.min(140, Math.max(90, (s.x1 - s.x0) / 5));
-  }, (ctx, s, w, h, t) => {
-    ctx.clearRect(0, 0, w, h);
-    const light = root.classList.contains("is-light");
-    const rgb = light ? "4,120,87" : "52,211,153";
-    const W = s.x1 - s.x0, H = s.y1 - s.y0, live = !reduced.matches;
-    const dt = Math.min(0.05, Math.max(0, t - (s.last ?? t))); s.last = t;
-    const N = s.nodes;
-    for (const p of N) {
-      if (!live) break;
-      p.u += p.vx * dt; p.v += p.vy * dt;
-      if (p.u < -0.02) p.u = 1.02; else if (p.u > 1.02) p.u = -0.02;
-      if (p.v < -0.02) p.v = 1.02; else if (p.v > 1.02) p.v = -0.02;
-      p.x = s.x0 + p.u * W; p.y = s.y0 + p.v * H;
-    }
-    if (!live) for (const p of N) { p.x = s.x0 + p.u * W; p.y = s.y0 + p.v * H; }
-    const L2 = s.link * s.link, B = 5, buckets = Array.from({ length: B }, () => []);
-    for (let i = 0; i < N.length; i++) for (let j = i + 1; j < N.length; j++) {
-      const a = N[i], b = N[j], dx = a.x - b.x, dy = a.y - b.y, d2 = dx * dx + dy * dy;
-      if (d2 > L2) continue;
-      buckets[Math.min(B - 1, ((1 - d2 / L2) * B) | 0)].push(a.x, a.y, b.x, b.y);
-    }
-    ctx.lineWidth = 0.9; ctx.lineCap = "round";
-    buckets.forEach((seg, k) => {
-      if (!seg.length) return;
-      ctx.strokeStyle = `rgba(${rgb},${(((k + 0.5) / B) * (light ? 0.42 : 0.36)).toFixed(3)})`;
+  /* 6. Karty projektów (AIQ, Algorytm w todze, HIL): dryfujące neurony łączące się w sieć,
+        opcjonalnie z jednym symbolem kreślonym linią w środku (waga, zamek) */
+  const symbols = {
+    // waga sprawiedliwości: belka na słupku, lekko się kołysze, dwie szale
+    scales(ctx, cx, cy, S, t, rgb) {
+      const a = 0.07 * Math.sin(t * 0.9);
+      ctx.strokeStyle = `rgba(${rgb},.9)`; ctx.lineWidth = 1.4; ctx.lineCap = "round";
+      ctx.beginPath(); ctx.moveTo(cx, cy - S * 0.42); ctx.lineTo(cx, cy + S * 0.42); ctx.moveTo(cx - S * 0.16, cy + S * 0.42); ctx.lineTo(cx + S * 0.16, cy + S * 0.42); ctx.stroke();
+      const bx = Math.cos(a) * S * 0.46, by = Math.sin(a) * S * 0.46;
+      ctx.beginPath(); ctx.moveTo(cx - bx, cy - S * 0.42 - by); ctx.lineTo(cx + bx, cy - S * 0.42 + by); ctx.stroke();
+      for (const sgn of [-1, 1]) {
+        const px = cx + sgn * bx, py = cy - S * 0.42 + sgn * by, d = S * 0.26, w = S * 0.14;
+        ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(px - w, py + d); ctx.moveTo(px, py); ctx.lineTo(px + w, py + d); ctx.moveTo(px, py); ctx.lineTo(px, py + d); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(px - w * 1.2, py + d); ctx.quadraticCurveTo(px, py + d + w, px + w * 1.2, py + d); ctx.stroke();
+      }
+      ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(cx, cy - S * 0.42, 2.4, 0, 6.283); ctx.fill();
+    },
+    // zamek: okrągła wieża-donżon z blankami i kaplica z dwuspadowym dachem, unoszące się jak hologram, z linią skanu
+    castle(ctx, cx, cy, S, t, rgb, live) {
+      const y0 = cy + S * 0.36 + (live ? Math.sin(t * 0.7) * S * 0.02 : 0);
+      ctx.strokeStyle = `rgba(${rgb},.9)`; ctx.lineWidth = 1.4; ctx.lineCap = "round"; ctx.lineJoin = "round";
+      const tw = S * 0.22, th = S * 0.62, tx = cx - S * 0.3;
       ctx.beginPath();
-      for (let i = 0; i < seg.length; i += 4) { ctx.moveTo(seg[i], seg[i + 1]); ctx.lineTo(seg[i + 2], seg[i + 3]); }
+      ctx.moveTo(tx - tw / 2, y0); ctx.lineTo(tx - tw / 2, y0 - th); ctx.lineTo(tx + tw / 2, y0 - th); ctx.lineTo(tx + tw / 2, y0);
+      for (let i = 0; i < 3; i++) { const x = tx - tw / 2 + (i * tw) / 3; ctx.moveTo(x, y0 - th); ctx.lineTo(x, y0 - th - S * 0.07); ctx.lineTo(x + tw / 6, y0 - th - S * 0.07); ctx.lineTo(x + tw / 6, y0 - th); }
+      ctx.moveTo(tx - S * 0.025, y0 - th * 0.62); ctx.lineTo(tx - S * 0.025, y0 - th * 0.5); ctx.moveTo(tx - S * 0.025, y0 - th * 0.36); ctx.lineTo(tx - S * 0.025, y0 - th * 0.24);
+      const kx = cx + S * 0.16, kw = S * 0.34, kh = S * 0.3;
+      ctx.moveTo(kx - kw / 2, y0); ctx.lineTo(kx - kw / 2, y0 - kh); ctx.lineTo(kx, y0 - kh - S * 0.2); ctx.lineTo(kx + kw / 2, y0 - kh); ctx.lineTo(kx + kw / 2, y0);
+      ctx.moveTo(kx, y0 - kh - S * 0.2); ctx.lineTo(kx, y0 - kh - S * 0.3); ctx.moveTo(kx - S * 0.03, y0 - kh - S * 0.26); ctx.lineTo(kx + S * 0.03, y0 - kh - S * 0.26);
+      ctx.moveTo(kx - S * 0.05, y0); ctx.lineTo(kx - S * 0.05, y0 - kh * 0.5); ctx.lineTo(kx + S * 0.05, y0 - kh * 0.5); ctx.lineTo(kx + S * 0.05, y0);
+      ctx.moveTo(cx - S * 0.5, y0); ctx.lineTo(cx + S * 0.5, y0);
       ctx.stroke();
+      if (live) {
+        const k = (t * 0.22) % 1, sy = y0 - th - S * 0.1 + k * (th + S * 0.1);
+        ctx.strokeStyle = `rgba(167,243,208,${(0.7 * Math.sin(k * Math.PI)).toFixed(2)})`; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(cx - S * 0.52, sy); ctx.lineTo(cx + S * 0.52, sy); ctx.stroke();
+      }
+    },
+  };
+  function neuronCard(id, symbol) {
+    scene(document.getElementById(id), (s, w, h) => {
+      const mobile = w < 700;
+      const n = mobile ? 34 : 58;
+      if (!s.nodes || s.nodes.length !== n) {
+        s.nodes = Array.from({ length: n }, () => ({ u: Math.random(), v: Math.random(), vx: (Math.random() - 0.5) * 0.16, vy: (Math.random() - 0.5) * 0.16, r: 1 + Math.random() * 1.8, ph: Math.random() * 6.283 }));
+      }
+      // obszar sieci: prawa część karty (na telefonie cała szerokość, górna część)
+      s.x0 = mobile ? 0 : w * 0.38; s.x1 = w; s.y0 = 0; s.y1 = mobile ? h * 0.62 : h;
+      s.link = Math.min(140, Math.max(90, (s.x1 - s.x0) / 5));
+      s.S = Math.min((s.y1 - s.y0) * 0.6, (s.x1 - s.x0) * 0.36);
+    }, (ctx, s, w, h, t) => {
+      ctx.clearRect(0, 0, w, h);
+      const light = root.classList.contains("is-light");
+      const rgb = light ? "4,120,87" : "52,211,153";
+      const W = s.x1 - s.x0, H = s.y1 - s.y0, live = !reduced.matches;
+      const dt = Math.min(0.05, Math.max(0, t - (s.last ?? t))); s.last = t;
+      const N = s.nodes;
+      for (const p of N) {
+        if (live) {
+          p.u += p.vx * dt; p.v += p.vy * dt;
+          if (p.u < -0.02) p.u = 1.02; else if (p.u > 1.02) p.u = -0.02;
+          if (p.v < -0.02) p.v = 1.02; else if (p.v > 1.02) p.v = -0.02;
+        }
+        p.x = s.x0 + p.u * W; p.y = s.y0 + p.v * H;
+      }
+      const L2 = s.link * s.link, B = 5, buckets = Array.from({ length: B }, () => []);
+      for (let i = 0; i < N.length; i++) for (let j = i + 1; j < N.length; j++) {
+        const a = N[i], b = N[j], dx = a.x - b.x, dy = a.y - b.y, d2 = dx * dx + dy * dy;
+        if (d2 > L2) continue;
+        buckets[Math.min(B - 1, ((1 - d2 / L2) * B) | 0)].push(a.x, a.y, b.x, b.y);
+      }
+      ctx.lineWidth = 0.9; ctx.lineCap = "round";
+      buckets.forEach((seg, k) => {
+        if (!seg.length) return;
+        ctx.strokeStyle = `rgba(${rgb},${(((k + 0.5) / B) * (light ? 0.42 : 0.36)).toFixed(3)})`;
+        ctx.beginPath();
+        for (let i = 0; i < seg.length; i += 4) { ctx.moveTo(seg[i], seg[i + 1]); ctx.lineTo(seg[i + 2], seg[i + 3]); }
+        ctx.stroke();
+      });
+      const sprite = glow(light);
+      if (!light) ctx.globalCompositeOperation = "lighter";
+      ctx.fillStyle = `rgb(${rgb})`;
+      for (const p of N) {
+        const k = 0.55 + 0.45 * Math.sin(t * 1.4 + p.ph);
+        ctx.globalAlpha = 0.5 + 0.5 * k;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r * (0.8 + 0.4 * k), 0, 6.283); ctx.fill();
+        if (p.r > 2.3) { ctx.globalAlpha = 0.35 + 0.45 * k; ctx.drawImage(sprite, p.x - 7, p.y - 7, 14, 14); }
+      }
+      ctx.globalAlpha = 1;
+      if (symbol) symbols[symbol](ctx, s.x0 + W * 0.5, s.y0 + H * 0.5, s.S, t, rgb, live);
+      ctx.globalCompositeOperation = "source-over";
     });
-    const sprite = glow(light);
-    if (!light) ctx.globalCompositeOperation = "lighter";
-    ctx.fillStyle = `rgb(${rgb})`;
-    for (const p of N) {
-      const k = 0.55 + 0.45 * Math.sin(t * 1.4 + p.ph);
-      ctx.globalAlpha = 0.5 + 0.5 * k;
-      ctx.beginPath(); ctx.arc(p.x, p.y, p.r * (0.8 + 0.4 * k), 0, 6.283); ctx.fill();
-      if (p.r > 2.3) { ctx.globalAlpha = 0.35 + 0.45 * k; ctx.drawImage(sprite, p.x - 7, p.y - 7, 14, 14); }
-    }
-    ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over";
-  });
+  }
+  neuronCard("aiqFx");
+  neuronCard("togaFx", "scales");
+  neuronCard("hilFx", "castle");
 
   // Linie energii w SVG (CSS) — pauza poza ekranem
   const flow = document.querySelector(".flow");
