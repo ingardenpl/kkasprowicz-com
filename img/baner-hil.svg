@@ -13,9 +13,9 @@
 @keyframes blink{0%,100%{opacity:.4}50%{opacity:1}}
 .castle{animation:hover 6s ease-in-out infinite,flicker 7s linear infinite}
 .scan{animation:scan 4s linear infinite}
-.p{fill:#a7f3d0;animation:rise 6s linear infinite}
+.p{fill:#a7f3d0;opacity:0;animation:rise 6s linear infinite}
 .led{animation:blink 2s ease-in-out infinite}
-@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}.p{display:none}}
 </style>
 </defs>
 <rect width="1200" height="300" fill="url(#sky)"/>
@@ -45,7 +45,7 @@
   <path d="M470 180 H730 M470 196 H730" stroke-opacity=".35"/>
 </g>
 <!-- linia skanowania -->
-<g class="scan"><rect x="440" y="24" width="320" height="2" fill="#a7f3d0" opacity=".8" filter="url(#glow)"/></g>
+<g class="scan" transform="translate(110,0)"><rect x="440" y="24" width="320" height="2" fill="#a7f3d0" opacity=".8" filter="url(#glow)"/></g>
 <!-- cząstki -->
 <g><circle class="p" cx="500" cy="210" r="1.8" style="animation-delay:-1s"/><circle class="p" cx="560" cy="212" r="1.4" style="animation-delay:-3.4s"/><circle class="p" cx="620" cy="210" r="2" style="animation-delay:-5s"/><circle class="p" cx="690" cy="212" r="1.6" style="animation-delay:-2.2s"/><circle class="p" cx="730" cy="208" r="1.5" style="animation-delay:-4.1s"/></g>
 </g>

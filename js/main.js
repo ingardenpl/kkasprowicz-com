@@ -17,7 +17,7 @@
   const title = document.querySelector("title");
   const live = document.getElementById("live");
   const og = document.querySelector('meta[property="og:description"]');
-  const pl = { meta: meta.content, title: title.textContent, og: og.content };
+  const pl = { meta: meta.dataset.pl, title: title.dataset.pl, og: og.dataset.pl };
   const hrefs = [...document.querySelectorAll("[data-href-en]")].map((a) => [a, a.getAttribute("href")]);
   function setLang(l, announce) {
     root.lang = l;
