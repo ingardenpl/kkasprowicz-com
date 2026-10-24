@@ -451,8 +451,7 @@
     }
   }, (ctx, s, w, h, t) => {
     ctx.clearRect(0, 0, w, h);
-    const light = root.classList.contains("is-light");
-    const rgb = light ? "4,120,87" : "52,211,153";
+    const light = false, rgb = "52,211,153"; // karta atlasu jest czarna w obu motywach
     // odwzorowanie: równoleżniki proste, południki lekko zakrzywione (jak w projekcji Robinsona)
     const X = (u, v) => s.cx + (u - 0.5) * s.W * (0.84 + 0.16 * Math.cos((v - 0.5) * Math.PI));
     const Y = (v) => s.cy + (v - 0.5) * s.H;
@@ -504,7 +503,7 @@
   const symbols = {
     // waga sprawiedliwości: belka na słupku, lekko się kołysze, dwie szale
     scales(ctx, cx, cy, S, t, rgb) {
-      const a = 0.07 * Math.sin(t * 0.9);
+      const a = live ? 0.07 * Math.sin(t * 0.9) : 0;
       ctx.strokeStyle = `rgba(${rgb},.9)`; ctx.lineWidth = 1.4; ctx.lineCap = "round";
       ctx.beginPath(); ctx.moveTo(cx, cy - S * 0.42); ctx.lineTo(cx, cy + S * 0.42); ctx.moveTo(cx - S * 0.16, cy + S * 0.42); ctx.lineTo(cx + S * 0.16, cy + S * 0.42); ctx.stroke();
       const bx = Math.cos(a) * S * 0.46, by = Math.sin(a) * S * 0.46;
@@ -552,8 +551,7 @@
       s.cy = s.y0 + (s.y1 - s.y0) * (mobile ? 0.38 : 0.5);
     }, (ctx, s, w, h, t) => {
       ctx.clearRect(0, 0, w, h);
-      const light = root.classList.contains("is-light");
-      const rgb = light ? "4,120,87" : "52,211,153";
+      const light = false, rgb = "52,211,153"; // karta jest czarna w obu motywach
       const W = s.x1 - s.x0, H = s.y1 - s.y0, live = !reduced.matches;
       const dt = Math.min(0.05, Math.max(0, t - (s.last ?? t))); s.last = t;
       const N = s.nodes;
