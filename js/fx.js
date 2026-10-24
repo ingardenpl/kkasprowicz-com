@@ -45,7 +45,7 @@
     document.addEventListener("kk-theme", () => frame(performance.now(), true));
     reduced.addEventListener?.("change", () => { start(); frame(performance.now(), true); });
     // ponowne skalowanie po przeniesieniu okna na ekran o innym DPR
-    const watchDpr = () => matchMedia(`(resolution: ${devicePixelRatio}dppx)`).addEventListener("change", () => { resize(); watchDpr(); }, { once: true });
+    const watchDpr = () => matchMedia(`(resolution: ${devicePixelRatio}dppx)`).addEventListener?.("change", () => { resize(); watchDpr(); }, { once: true });
     watchDpr();
     return state;
   }

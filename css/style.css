@@ -24,6 +24,7 @@
 
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:var(--hdr);-webkit-text-size-adjust:100%}
+html{overflow-x:clip}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.65 var(--body);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 img,svg,canvas{display:block;max-width:100%}
 a{color:inherit}
@@ -91,7 +92,9 @@ html[data-lang="en"] .num::before{content:"MODULE"}
 .flow .f3{animation-duration:15s;animation-delay:-7s}
 .flow .f4{animation-duration:11s;animation-delay:-5s;stroke-width:.7}
 @keyframes flow{from{stroke-dashoffset:1580}to{stroke-dashoffset:0}}
-.sec-dark::before{content:"";position:absolute;inset:0;z-index:-2;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1.2px);background-size:26px 26px;mask-image:radial-gradient(70% 70% at 50% 50%,#000,transparent)}
+.sec-dark::before{content:"";position:absolute;inset:0;z-index:-2;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1.2px);background-size:26px 26px;-webkit-mask-image:radial-gradient(70% 70% at 50% 50%,#000,transparent)}
+
+.cards{display:grid;mask-image:radial-gradient(70% 70% at 50% 50%,#000,transparent)}
 
 .cards{display:grid;gap:18px}
 .card{position:relative;padding:28px 24px 26px;border-radius:16px;border:1px solid var(--line);background:linear-gradient(160deg,rgba(255,255,255,.045),rgba(255,255,255,.01));transition:border-color .3s,transform .3s,box-shadow .3s}
@@ -191,7 +194,7 @@ html[data-lang="en"] .num::before{content:"MODULE"}
 
 @media (max-width:900px){
   .nav{display:none}
-  html{scroll-padding-top:116px}
+  html{scroll-padding-top:120px}
   .hero-in{padding-top:150px}
   .top{height:auto}
   .top-in{height:var(--hdr)}
@@ -390,7 +393,7 @@ html[data-lang="en"] .num::before{content:"MODULE"}
 /* 1. cele dotykowe ≥ 44 px i odstępy ≥ 8 px */
 .tbtn{min-width:44px;height:44px}
 .tabs [role=tab]{min-height:44px}
-.nav a{min-height:44px;display:inline-flex;align-items:center}
+@media (pointer:coarse){.nav a{min-height:44px;display:inline-flex;align-items:center}}
 @media (max-width:900px){.mnav{gap:8px}.mnav a{min-height:44px;display:inline-flex;align-items:center;padding:0 12px}}
 /* 2. informacja zwrotna przy naciśnięciu */
 .btn,.tbtn,.tabs [role=tab],.link,.mnav a,.nav a,.social a,.ib-banner{transition-property:transform,background,border-color,box-shadow,color,opacity;transition-duration:.18s}
@@ -401,7 +404,7 @@ html[data-lang="en"] .num::before{content:"MODULE"}
 @media (max-width:900px){
   .top{height:var(--hdr)}
   .top-in{height:var(--hdr)}
-  .mnav{position:absolute;left:0;right:0;top:var(--hdr);max-height:none;padding-block:0 10px;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);border-bottom:1px solid var(--line);transform:none;opacity:1;visibility:visible;transition:transform .25s,opacity .25s,visibility 0s}
+  .mnav{position:absolute;left:0;right:0;top:var(--hdr);max-height:none;padding-block:0 10px;background:var(--bg);background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);border-bottom:1px solid var(--line);transform:none;opacity:1;visibility:visible;transition:transform .25s,opacity .25s,visibility 0s}
   .top:not(.scrolled) .mnav{background:transparent;border-bottom-color:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
   .top.compact .mnav{max-height:none;padding-block:0 10px;transform:translateY(-10px);opacity:0;visibility:hidden;pointer-events:none;transition:transform .25s,opacity .25s,visibility 0s .25s}
 }
