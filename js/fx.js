@@ -534,18 +534,22 @@
       }
       const { pts, links } = s.th;
       const ang = live ? t * 0.3 : 0.6, ca = Math.cos(ang), sa = Math.sin(ang);
-      const wave = live ? ((t * 0.22) % 1.3) - 0.15 : -1;
+      const wave = live ? 1.15 - ((t * 0.22) % 1.3) : -1; // od dołu (y=1) do góry (y=0)
       const P = (p) => {
         const X = p.x * ca - p.z * sa, D = p.x * sa + p.z * ca;
         return [cx + X * S * 0.95, cy + (p.y - 0.55) * S * 1.15, D];
       };
       const proj = pts.map(P);
-      // siatka: tylko ściany zwrócone do widza, przezroczystość wg głębi
+      // siatka: krawędzie bledną wraz z głębią (trzy progi), tylne pomijane
       ctx.lineWidth = 0.8;
-      ctx.strokeStyle = `rgba(${rgb},.28)`;
-      ctx.beginPath();
-      for (const [a, b] of links) { if (proj[a][2] + proj[b][2] < -0.2) continue; ctx.moveTo(proj[a][0], proj[a][1]); ctx.lineTo(proj[b][0], proj[b][1]); }
-      ctx.stroke();
+      const tiers = [[0.15, 0.3], [-0.2, 0.14], [-0.45, 0.06]];
+      for (let k = 0; k < tiers.length; k++) {
+        const [lo, al] = tiers[k], hi = k ? tiers[k - 1][0] : 9;
+        ctx.strokeStyle = `rgba(${rgb},${al})`;
+        ctx.beginPath();
+        for (const [a, b] of links) { const d = proj[a][2] + proj[b][2]; if (d < lo || d >= hi) continue; ctx.moveTo(proj[a][0], proj[a][1]); ctx.lineTo(proj[b][0], proj[b][1]); }
+        ctx.stroke();
+      }
       // neurony: pulsują, przepaska jaśniejsza, fala rozjaśnienia
       for (let i = 0; i < pts.length; i++) {
         const p = pts[i], [x, y, d] = proj[i];
