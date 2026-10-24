@@ -443,7 +443,7 @@
   /* 5. Arkusz atlasu — tło karty „Atlas AI w edukacji”: siatka kartograficzna, punkty rozjaśniane falą,
         pulsujące ogniska i łuki między nimi z wędrującym światłem (odpowiednik globusa trackera, ale płaski) */
   scene(document.getElementById("atlasFx"), (s, w, h) => {
-    s.W = Math.min(w * 0.62, h * 1.9); s.H = s.W * 0.52;
+    s.W = Math.min(w * 0.5, h * 1.6); s.H = s.W * 0.52;
     s.cx = w - s.W * 0.52; s.cy = h * 0.5;
     if (!s.pts) {
       s.pts = Array.from({ length: 150 }, () => ({ u: Math.random(), v: Math.random(), ph: Math.random() * 6.283 }));

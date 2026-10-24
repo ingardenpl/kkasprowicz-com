@@ -357,5 +357,16 @@ html[data-lang="en"] .num::before{content:"MODULE"}
 /* v40: animowany baner kursu w wyróżnionej karcie */
 .course-banner{display:block;width:100%;height:auto;aspect-ratio:4/1;border-radius:12px;margin:0 0 20px;box-shadow:0 18px 40px -24px rgba(16,185,129,.45)}
 .course-feat::after{display:none}
-/* v43: banery projektów (AIQ, Algorytm w todze, HIL) w stylu banera kursu */
-.proj-banner{display:block;width:100%;height:auto;aspect-ratio:4/1;border-radius:12px;margin:-6px 0 18px;box-shadow:0 18px 40px -24px rgba(16,185,129,.45)}
+
+/* v45: karty projektów na całą szerokość jak tracker — tekst po lewej, minimalistyczna grafika po prawej */
+.proj-wide,.proj-atlas{grid-column:1/-1}
+.proj-wide{position:relative;min-height:320px;display:flex;align-items:center;background:var(--black);color:#fff;border:0;overflow:clip;isolation:isolate;--ink-2:#c3cdc8;--accent:var(--em-2)}
+.proj-wide .proj-body{position:relative;max-width:520px}
+.proj-wide .link{color:var(--em-2)}
+.proj-art{position:absolute;right:4%;top:0;height:100%;width:auto;max-width:56%;object-fit:contain;z-index:-1;opacity:.95}
+.proj-wide::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,var(--black) 38%,transparent 70%);pointer-events:none}
+@media (max-width:900px){
+  .proj-wide{min-height:420px;align-items:flex-end}
+  .proj-art{right:0;left:0;width:100%;max-width:none;height:62%;top:0}
+  .proj-wide::after{background:linear-gradient(0deg,var(--black) 52%,rgba(5,8,7,.65) 80%,transparent)}
+}
