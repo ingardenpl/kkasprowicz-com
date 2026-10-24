@@ -370,3 +370,5 @@ html[data-lang="en"] .num::before{content:"MODULE"}
   .proj-art{right:0;left:0;width:100%;max-width:none;height:62%;top:0}
   .proj-wide::after{background:linear-gradient(0deg,var(--black) 52%,rgba(5,8,7,.65) 80%,transparent)}
 }
+/* v48: karta AIQ z żywą siecią neuronów (canvas) zamiast grafiki */
+.proj-wide .proj-fx{z-index:-1}
