@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Tinos:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,900;1,700&family=Source+Sans+3:wght@600&display=swap">
-<link rel="stylesheet" href="css/style.css?v=58">
+<link rel="stylesheet" href="css/style.css?v=59">
 </head>
 <body>
 <a class="skip" href="#main"><span data-l="pl" lang="pl">Przejdź do treści</span><span data-l="en" lang="en">Skip to content</span></a>
@@ -176,12 +176,12 @@
             <img class="course-banner" src="img/kurs-ai-baner.svg?v=3" alt="" width="1200" height="300" loading="lazy" decoding="async">
             <span class="ctype"><span data-l="pl" lang="pl">Wykład monograficzny</span><span data-l="en" lang="en">Specialised lecture</span></span>
             <h3><span data-l="pl" lang="pl">Sztuczna inteligencja. Wyzwania społeczne, kulturowe i prawne</span><span data-l="en" lang="en">Artificial Intelligence: Social, Cultural and Legal Challenges</span></h3>
-            <a class="link" href="https://ingardenpl.github.io/ai-wyzwania/" rel="noopener"><span data-l="pl" lang="pl">Otwórz kurs</span><span data-l="en" lang="en">Open course (Polish)</span> <span aria-hidden="true">↗</span></a>
+            <a class="link" href="https://ingardenpl.github.io/ai-wyzwania/" target="_blank" rel="noopener"><span data-l="pl" lang="pl">Otwórz kurs</span><span data-l="en" lang="en">Open course (Polish)</span> <span aria-hidden="true">↗</span><span class="sr" data-l="pl" lang="pl"> (otwiera się w nowej karcie)</span><span class="sr" data-l="en" lang="en"> (opens in a new tab)</span></a>
           </li>
           <li class="course">
             <span class="ctype"><span data-l="pl" lang="pl">Wykład i ćwiczenia</span><span data-l="en" lang="en">Lecture and classes</span></span>
             <h3><span data-l="pl" lang="pl">Prawne podstawy organizacji i zarządzania</span><span data-l="en" lang="en">Legal Foundations of Organisation and Management</span></h3>
-            <a class="link link-dark" href="https://ingardenpl.github.io/podstawy-zarzadzania/" rel="noopener"><span data-l="pl" lang="pl">Otwórz kurs</span><span data-l="en" lang="en">Open course (Polish)</span> <span aria-hidden="true">↗</span></a>
+            <a class="link link-dark" href="https://ingardenpl.github.io/podstawy-zarzadzania/" target="_blank" rel="noopener"><span data-l="pl" lang="pl">Otwórz kurs</span><span data-l="en" lang="en">Open course (Polish)</span> <span aria-hidden="true">↗</span><span class="sr" data-l="pl" lang="pl"> (otwiera się w nowej karcie)</span><span class="sr" data-l="en" lang="en"> (opens in a new tab)</span></a>
           </li>
           <li class="course">
             <span class="ctype"><span data-l="pl" lang="pl">Wykład</span><span data-l="en" lang="en">Lecture</span></span>
@@ -195,25 +195,19 @@
       </div>
 
       <div class="panel" role="tabpanel" id="p-ib" aria-labelledby="t-ib" tabindex="0" hidden>
-        <a class="ib-banner" href="https://kkasprowicz.com/m28/" aria-label="IB DP History M28 — strona kursu (logowanie dla uczniów)" data-aria-pl="IB DP History M28 — strona kursu (logowanie dla uczniów)" data-aria-en="IB DP History M28 — course website (student sign-in)">
-          <svg viewBox="0 0 1200 340" preserveAspectRatio="xMidYMid slice" role="img" aria-hidden="true" focusable="false">
+        <a class="ib-banner" href="/m28/" aria-label="IB DP History M28 — strona kursu (logowanie dla uczniów)" data-aria-pl="IB DP History M28 — strona kursu (logowanie dla uczniów)" data-aria-en="IB DP History M28 — course website (student sign-in)">
+          <svg viewBox="0 0 1200 340" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
             <defs>
               <linearGradient id="ibPaper" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFCF5"/><stop offset="1" stop-color="#EFE6D3"/></linearGradient>
               <linearGradient id="ibWave" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#1F2A44"/><stop offset="1" stop-color="#1F2A44" stop-opacity=".35"/></linearGradient>
+              <linearGradient id="ibFade" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFFCF5" stop-opacity="0"/><stop offset=".55" stop-color="#FFFCF5" stop-opacity="0"/><stop offset="1" stop-color="#FFFCF5" stop-opacity="1"/></linearGradient>
+              <clipPath id="ibLeft"><rect x="0" y="0" width="640" height="340"/></clipPath>
               <pattern id="ibGrain" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".6" fill="#2A2118" fill-opacity=".05"/></pattern>
             </defs>
             <rect width="1200" height="340" fill="url(#ibPaper)"/>
             <rect width="1200" height="340" fill="url(#ibGrain)"/>
-            <!-- czerwone słońce -->
-            <circle class="ib-sun" cx="300" cy="118" r="54" fill="#A31919" fill-opacity=".92"/>
-            <!-- wielka fala (nawiązanie do Hokusaia), granat -->
-            <g class="ib-wave" fill="none" stroke="#1F2A44" stroke-width="2.2" stroke-linecap="round">
-              <path d="M-20 262 C80 262 120 190 190 192 C240 194 250 150 320 150 C370 150 385 112 430 112 C455 112 468 128 466 142 C462 160 436 164 428 150" stroke-opacity=".9"/>
-              <path d="M-20 290 C90 290 130 232 200 232 C260 232 280 196 340 196 C390 196 410 172 450 172" stroke-opacity=".55"/>
-              <path d="M-20 316 C110 316 150 268 220 268 C290 268 320 240 390 240 C430 240 450 224 480 226" stroke-opacity=".35"/>
-              <path d="M428 150 C418 156 404 150 402 140 M466 142 C470 134 462 126 452 128" stroke-opacity=".9"/>
-            </g>
-            <path d="M-20 340 L-20 262 C80 262 120 190 190 192 C240 194 250 150 320 150 C370 150 385 112 430 112 L430 340 Z" fill="url(#ibWave)" opacity=".10"/>
+            <!-- Katsushika Hokusai, „Wielka fala w Kanagawie” (ok. 1831), domena publiczna -->
+            <g clip-path="url(#ibLeft)"><image class="ib-img" href="img/great-wave.jpg?v=1" x="-20" y="-40" width="680" height="480" preserveAspectRatio="xMidYMid slice"/><rect x="0" y="0" width="640" height="340" fill="url(#ibFade)"/></g>
             <!-- wieża Kremla z gwiazdą, bordo -->
             <g class="ib-tower" fill="none" stroke="#A31919" stroke-width="2" stroke-linejoin="round">
               <path d="M1010 340 V214 H1066 V340"/>
@@ -246,6 +240,7 @@
           </svg>
           <span class="ib-banner-cta"><span data-l="pl" lang="pl">Otwórz kurs</span><span data-l="en" lang="en">Open the course</span> <span aria-hidden="true">↗</span></span>
         </a>
+        <p class="ib-link"><a class="link link-dark" href="/m28/"><span data-l="pl" lang="pl">Strona kursu dla uczniów</span><span data-l="en" lang="en">Course website for students</span> <span aria-hidden="true">→</span></a> <span class="ib-url">kkasprowicz.com/m28/</span></p>
         <p class="panel-lede"><span data-l="pl" lang="pl">Międzynarodowe Liceum Paderewski w Lublinie — kursy IB Diploma Programme i Middle Years Programme History. W kursie DP równolegle działają dwa programy: przewodnik z 2020 roku (ostatnie egzaminy w 2027) i nowy przewodnik od rocznika M28.</span><span data-l="en" lang="en">Paderewski International High School, Lublin — IB Diploma Programme and Middle Years Programme History. Two DP programmes run side by side: the 2020 guide (final exams in 2027) and the new guide from the M28 cohort onwards.</span></p>
 
         <article class="track track-new" id="ib-m28" aria-labelledby="ib-m28-h">
@@ -332,7 +327,7 @@
             <p class="kicker"><span data-l="pl" lang="pl">AIQ · Globalne Obserwatorium Regulacji SI</span><span data-l="en" lang="en">AIQ · Global AI Regulation Observatory</span></p>
             <h3 lang="en">World AI Regulation Tracker</h3>
             <p><span data-l="pl" lang="pl">Interaktywny instrument analityczny do monitorowania, systematyzacji i krytycznej ewaluacji ram prawnych sztucznej inteligencji — od wdrażania Aktu o sztucznej inteligencji w UE po porządki prawne poszczególnych państw.</span><span data-l="en" lang="en">An interactive analytical instrument for monitoring, systematising and critically evaluating legal frameworks for artificial intelligence — from the implementation of the EU AI Act to the legal orders of individual countries.</span></p>
-            <a class="link" href="https://aiqedu.pl/mapa-regulacji-ai/" rel="noopener"><span data-l="pl" lang="pl">Otwórz tracker</span><span data-l="en" lang="en">Open the tracker</span> <span aria-hidden="true">↗</span></a>
+            <a class="link" href="https://aiqedu.pl/mapa-regulacji-ai/" target="_blank" rel="noopener"><span data-l="pl" lang="pl">Otwórz tracker</span><span data-l="en" lang="en">Open the tracker</span> <span aria-hidden="true">↗</span><span class="sr" data-l="pl" lang="pl"> (otwiera się w nowej karcie)</span><span class="sr" data-l="en" lang="en"> (opens in a new tab)</span></a>
           </div>
         </article>
         <article class="proj proj-wide">
@@ -341,7 +336,7 @@
           <p class="kicker"><span data-l="pl" lang="pl">Koordynator · 2026</span><span data-l="en" lang="en">Coordinator · 2026</span></p>
           <h3><span data-l="pl" lang="pl">AIQ. Edukacja w erze sztucznej inteligencji</span><span data-l="en" lang="en">AIQ. Education in the Age of Artificial Intelligence</span></h3>
           <p><span data-l="pl" lang="pl">Projekt edukacyjny UMCS finansowany z grantu Fundacji ORLEN w programie „MOC Odpowiedzialności”: warsztaty dla uczniów, szkolenia online dla nauczycieli i konferencja regionalna, która odbyła się 15 X 2026 na WPiA UMCS. We współpracy z Międzynarodowym Liceum Paderewski.</span><span data-l="en" lang="en">A UMCS educational project funded by an ORLEN Foundation grant (“MOC Odpowiedzialności” programme): workshops for students, online training for teachers and a regional conference held on 15 October 2026 at the Faculty of Law and Administration, UMCS. In cooperation with the Paderewski International High School.</span></p>
-          <a class="link link-dark" href="https://aiqedu.pl" rel="noopener">aiqedu.pl <span aria-hidden="true">↗</span></a>
+          <a class="link link-dark" href="https://aiqedu.pl" target="_blank" rel="noopener">aiqedu.pl <span aria-hidden="true">↗</span><span class="sr" data-l="pl" lang="pl"> (otwiera się w nowej karcie)</span><span class="sr" data-l="en" lang="en"> (opens in a new tab)</span></a>
           </div>
         </article>
         <article class="proj proj-wide">
@@ -358,7 +353,7 @@
           <p class="kicker">AIQ</p>
           <h3><span data-l="pl" lang="pl">Atlas AI w edukacji</span><span data-l="en" lang="en">Atlas of AI in Education</span></h3>
           <p><span data-l="pl" lang="pl">Obserwatorium polityk i wdrożeń AI w szkołach i na uczelniach. Zasada: nic bez źródła, nic bez wskazania, kto płaci i kto zbadał.</span><span data-l="en" lang="en">An observatory of AI policies and deployments in schools and universities. Rule: no claim without a source — and always who paid and who evaluated.</span></p>
-          <a class="link link-dark" href="https://aiqedu.pl/atlas/" rel="noopener"><span data-l="pl" lang="pl">Otwórz atlas</span><span data-l="en" lang="en">Open the atlas</span> <span aria-hidden="true">↗</span></a>
+          <a class="link link-dark" href="https://aiqedu.pl/atlas/" target="_blank" rel="noopener"><span data-l="pl" lang="pl">Otwórz atlas</span><span data-l="en" lang="en">Open the atlas</span> <span aria-hidden="true">↗</span><span class="sr" data-l="pl" lang="pl"> (otwiera się w nowej karcie)</span><span class="sr" data-l="en" lang="en"> (opens in a new tab)</span></a>
           </div>
         </article>
         <article class="proj proj-wide">
@@ -367,7 +362,7 @@
           <p class="kicker"><span data-l="pl" lang="pl">Spin-off UMCS</span><span data-l="en" lang="en">UMCS spin-off</span></p>
           <h3 lang="en">Historical Imagination Lab</h3>
           <p><span data-l="pl" lang="pl">Współzałożony z prof. Janem Pomorskim, dr. Bartłomiejem Stolarzem i Łukaszem Świerżewskim: gry edukacyjne, aplikacje interaktywne i materiały do nauczania historii. W ramach Labu powstaje newsletter „Pryzmat” o nowych technologiach, tworzony z dr. Bartłomiejem Stolarzem.</span><span data-l="en" lang="en">Co-founded with Prof. Jan Pomorski, Dr Bartłomiej Stolarz and Łukasz Świerżewski: educational games, interactive apps and history teaching materials. The Lab also publishes “Pryzmat”, a newsletter on new technologies written with Dr Bartłomiej Stolarz.</span></p>
-          <a class="link link-dark" href="https://substack.com/@historicalimaginationlab" rel="noopener">Substack <span aria-hidden="true">↗</span></a>
+          <a class="link link-dark" href="https://substack.com/@historicalimaginationlab" target="_blank" rel="noopener">Substack <span aria-hidden="true">↗</span><span class="sr" data-l="pl" lang="pl"> (otwiera się w nowej karcie)</span><span class="sr" data-l="en" lang="en"> (opens in a new tab)</span></a>
           </div>
         </article>
       </div>
@@ -398,22 +393,22 @@
           <li><span class="yr">2020</span><div><b lang="en">Reflections on Historiography and Theory of Revolution</b><span class="where">Res Historica, <span data-l="pl" lang="pl">nr</span><span data-l="en" lang="en">no.</span> 49</span></div></li>
           <li><span class="yr">2019</span><div><span class="au">K. Kasprowicz, J. Pomorski, A. Stępnik, B. Stolarz</span><b lang="pl">Szlakami Polski Niepodległej 1914–1922. Interaktywny Atlas Historyczny</b><span class="where"><span data-l="pl" lang="pl">Warszawa: Wydawnictwo IPN</span><span data-l="en" lang="en">Warsaw: IPN Publishing</span></span></div></li>
         </ol>
-        <p class="note"><a class="link link-dark" href="https://www.researchgate.net/profile/Karol-Kasprowicz" rel="noopener">ResearchGate <span aria-hidden="true">↗</span></a> <a class="link link-dark" href="https://umcs-pl.academia.edu/KarolKasprowicz" rel="noopener">Academia.edu <span aria-hidden="true">↗</span></a></p>
+        <p class="note"><a class="link link-dark" href="https://www.researchgate.net/profile/Karol-Kasprowicz" target="_blank" rel="noopener">ResearchGate <span aria-hidden="true">↗</span><span class="sr" data-l="pl" lang="pl"> (otwiera się w nowej karcie)</span><span class="sr" data-l="en" lang="en"> (opens in a new tab)</span></a> <a class="link link-dark" href="https://umcs-pl.academia.edu/KarolKasprowicz" target="_blank" rel="noopener">Academia.edu <span aria-hidden="true">↗</span><span class="sr" data-l="pl" lang="pl"> (otwiera się w nowej karcie)</span><span class="sr" data-l="en" lang="en"> (opens in a new tab)</span></a></p>
       </div>
 
       <div class="panel" role="tabpanel" id="p-tr" aria-labelledby="t-tr" tabindex="0" hidden>
         <h3 class="sub"><span data-l="pl" lang="pl">Z polskiego na angielski</span><span data-l="en" lang="en">Polish → English</span></h3>
         <ol class="pubs">
-          <li><span class="yr">2023</span><div><span class="au">Jan Pomorski</span><b lang="en"><a href="https://www.taylorfrancis.com/books/oa-mono/10.4324/9781003393955/polish-theory-history-metahistory-topolski-pomian-tokarczuk-jan-pomorski" rel="noopener">Polish Theory of History and Metahistory in Topolski, Pomian, and Tokarczuk. From Hayden White and Beyond <span class="ext" aria-hidden="true">↗</span></a></b><span class="where">New York: Routledge · <span data-l="pl" lang="pl">wolny dostęp</span><span data-l="en" lang="en">open access</span></span><span class="co"><span data-l="pl" lang="pl">wspólnie z dr. Konradem Żyśko</span><span data-l="en" lang="en">with Dr Konrad Żyśko</span></span></div></li>
+          <li><span class="yr">2023</span><div><span class="au">Jan Pomorski</span><b lang="en"><a href="https://www.taylorfrancis.com/books/oa-mono/10.4324/9781003393955/polish-theory-history-metahistory-topolski-pomian-tokarczuk-jan-pomorski" target="_blank" rel="noopener">Polish Theory of History and Metahistory in Topolski, Pomian, and Tokarczuk. From Hayden White and Beyond <span class="ext" aria-hidden="true">↗</span><span class="sr" data-l="pl" lang="pl"> (otwiera się w nowej karcie)</span><span class="sr" data-l="en" lang="en"> (opens in a new tab)</span></a></b><span class="where">New York: Routledge · <span data-l="pl" lang="pl">wolny dostęp</span><span data-l="en" lang="en">open access</span></span><span class="co"><span data-l="pl" lang="pl">wspólnie z dr. Konradem Żyśko</span><span data-l="en" lang="en">with Dr Konrad Żyśko</span></span></div></li>
         </ol>
         <h3 class="sub"><span data-l="pl" lang="pl">Z angielskiego na polski</span><span data-l="en" lang="en">English → Polish</span></h3>
         <ol class="pubs">
           <li><span class="yr">2027</span><div><span class="au">Anthony Elliott</span><b lang="en">Algorithms of Anxiety: Fear in the Digital Age</b><span class="where"><span data-l="pl" lang="pl">przekład w przygotowaniu · Wydawnictwo UMCS, 2027</span><span data-l="en" lang="en">translation in preparation · UMCS Press, 2027</span></span><span class="co"><span data-l="pl" lang="pl">wspólnie z dr. Konradem Żyśko</span><span data-l="en" lang="en">with Dr Konrad Żyśko</span></span></div></li>
-          <li><span class="yr">2027</span><div><span class="au">Clifton Crais</span><b lang="pl"><a href="https://mtbiznes.pl/przeswity/wydawnictwo-przeswity/historia/swiat-z-krwi-i-prochu" rel="noopener">Świat z krwi i prochu. Przemoc i narodziny nowoczesności <span class="ext" aria-hidden="true">↗</span></a></b><span class="where"><span data-l="pl" lang="pl">Wydawnictwo Prześwity · premiera 22 I 2027</span><span data-l="en" lang="en">Prześwity · release 22 January 2027</span></span><span class="co"><span data-l="pl" lang="pl">wspólnie z dr. Konradem Żyśko</span><span data-l="en" lang="en">with Dr Konrad Żyśko</span></span></div></li>
+          <li><span class="yr">2027</span><div><span class="au">Clifton Crais</span><b lang="pl"><a href="https://mtbiznes.pl/przeswity/wydawnictwo-przeswity/historia/swiat-z-krwi-i-prochu" target="_blank" rel="noopener">Świat z krwi i prochu. Przemoc i narodziny nowoczesności <span class="ext" aria-hidden="true">↗</span><span class="sr" data-l="pl" lang="pl"> (otwiera się w nowej karcie)</span><span class="sr" data-l="en" lang="en"> (opens in a new tab)</span></a></b><span class="where"><span data-l="pl" lang="pl">Wydawnictwo Prześwity · premiera 22 I 2027</span><span data-l="en" lang="en">Prześwity · release 22 January 2027</span></span><span class="co"><span data-l="pl" lang="pl">wspólnie z dr. Konradem Żyśko</span><span data-l="en" lang="en">with Dr Konrad Żyśko</span></span></div></li>
           <li><span class="yr">2026</span><div><span class="au">John Keats</span><b lang="pl">Listy 1816–1820</b><span class="where"><span data-l="pl" lang="pl">w przygotowaniu · planowane wydanie: prawdopodobnie grudzień 2026</span><span data-l="en" lang="en">forthcoming · probably December 2026</span></span></div></li>
           <li><span class="yr">2026</span><div><span class="au">Percy Bysshe Shelley</span><b lang="pl">Ozymandiasz i inne wiersze</b><span class="where"><span data-l="pl" lang="pl">w przygotowaniu · publikacja w wolnym dostępie</span><span data-l="en" lang="en">forthcoming · open-access publication</span></span></div></li>
-          <li><span class="yr">2025</span><div><span class="au">Hannah Ritchie</span><b lang="pl"><a href="https://mtbiznes.pl/przeswity/wydawnictwo-przeswity/nauka/to-nie-koniec-swiata" rel="noopener">To nie jest koniec świata. Jak możemy ochronić Ziemię dla siebie i przyszłych pokoleń <span class="ext" aria-hidden="true">↗</span></a></b><span class="where" lang="pl">Wydawnictwo Prześwity</span><span class="co"><span data-l="pl" lang="pl">wspólnie z dr. Konradem Żyśko</span><span data-l="en" lang="en">with Dr Konrad Żyśko</span></span></div></li>
-          <li><span class="yr">2025</span><div><span class="au">Edward Fishman</span><b lang="pl"><a href="https://mtbiznes.pl/przeswity/wydawnictwo-przeswity/polityka/punkty-krytyczne" rel="noopener">Punkty krytyczne. Amerykańskie strategie w czasie wojen handlowych <span class="ext" aria-hidden="true">↗</span></a></b><span class="where" lang="pl">Wydawnictwo Prześwity</span><span class="co"><span data-l="pl" lang="pl">wspólnie z dr. Konradem Żyśko</span><span data-l="en" lang="en">with Dr Konrad Żyśko</span></span></div></li>
+          <li><span class="yr">2025</span><div><span class="au">Hannah Ritchie</span><b lang="pl"><a href="https://mtbiznes.pl/przeswity/wydawnictwo-przeswity/nauka/to-nie-koniec-swiata" target="_blank" rel="noopener">To nie jest koniec świata. Jak możemy ochronić Ziemię dla siebie i przyszłych pokoleń <span class="ext" aria-hidden="true">↗</span><span class="sr" data-l="pl" lang="pl"> (otwiera się w nowej karcie)</span><span class="sr" data-l="en" lang="en"> (opens in a new tab)</span></a></b><span class="where" lang="pl">Wydawnictwo Prześwity</span><span class="co"><span data-l="pl" lang="pl">wspólnie z dr. Konradem Żyśko</span><span data-l="en" lang="en">with Dr Konrad Żyśko</span></span></div></li>
+          <li><span class="yr">2025</span><div><span class="au">Edward Fishman</span><b lang="pl"><a href="https://mtbiznes.pl/przeswity/wydawnictwo-przeswity/polityka/punkty-krytyczne" target="_blank" rel="noopener">Punkty krytyczne. Amerykańskie strategie w czasie wojen handlowych <span class="ext" aria-hidden="true">↗</span><span class="sr" data-l="pl" lang="pl"> (otwiera się w nowej karcie)</span><span class="sr" data-l="en" lang="en"> (opens in a new tab)</span></a></b><span class="where" lang="pl">Wydawnictwo Prześwity</span><span class="co"><span data-l="pl" lang="pl">wspólnie z dr. Konradem Żyśko</span><span data-l="en" lang="en">with Dr Konrad Żyśko</span></span></div></li>
           <li><span class="yr">—</span><div><span class="au">Bertrand Russell</span><b lang="pl">Analiza umysłu</b><span class="where"><span data-l="pl" lang="pl">oryg. 1921 · przekład gotowy, poszukiwanie wydawcy</span><span data-l="en" lang="en">orig. 1921 · translation completed, seeking a publisher</span></span><span class="co"><span data-l="pl" lang="pl">wspólnie z dr. Konradem Żyśko</span><span data-l="en" lang="en">with Dr Konrad Żyśko</span></span></div></li>
         </ol>
       </div>
@@ -468,11 +463,11 @@
         <p><span data-l="pl" lang="pl">stacjonarnie: czwartek 9:00–9:45, piątek 12:00–12:45 (p. 416) · online: czwartek 9:45–11:15</span><span data-l="en" lang="en">in person: Thursday 9:00–9:45, Friday 12:00–12:45 (room 416) · online: Thursday 9:45–11:15</span></p>
       </div>
       <ul class="social">
-        <li><a href="https://www.researchgate.net/profile/Karol-Kasprowicz" rel="noopener">ResearchGate <span aria-hidden="true">↗</span></a></li>
-        <li><a href="https://umcs-pl.academia.edu/KarolKasprowicz" rel="noopener">Academia.edu <span aria-hidden="true">↗</span></a></li>
-        <li><a href="https://substack.com/@historicalimaginationlab" rel="noopener"><span data-l="pl" lang="pl">„Pryzmat” · Substack</span><span data-l="en" lang="en">“Pryzmat” · Substack</span> <span aria-hidden="true">↗</span></a></li>
-        <li><a href="https://www.umcs.pl/pl/addres-book-employee,18763,pl.html" rel="noopener"><span data-l="pl" lang="pl">profil UMCS</span><span data-l="en" lang="en">UMCS profile</span> <span aria-hidden="true">↗</span></a></li>
-        <li><a href="https://aiqedu.pl" rel="noopener">aiqedu.pl <span aria-hidden="true">↗</span></a></li>
+        <li><a href="https://www.researchgate.net/profile/Karol-Kasprowicz" target="_blank" rel="noopener">ResearchGate <span aria-hidden="true">↗</span><span class="sr" data-l="pl" lang="pl"> (otwiera się w nowej karcie)</span><span class="sr" data-l="en" lang="en"> (opens in a new tab)</span></a></li>
+        <li><a href="https://umcs-pl.academia.edu/KarolKasprowicz" target="_blank" rel="noopener">Academia.edu <span aria-hidden="true">↗</span><span class="sr" data-l="pl" lang="pl"> (otwiera się w nowej karcie)</span><span class="sr" data-l="en" lang="en"> (opens in a new tab)</span></a></li>
+        <li><a href="https://substack.com/@historicalimaginationlab" target="_blank" rel="noopener"><span data-l="pl" lang="pl">„Pryzmat” · Substack</span><span data-l="en" lang="en">“Pryzmat” · Substack</span> <span aria-hidden="true">↗</span><span class="sr" data-l="pl" lang="pl"> (otwiera się w nowej karcie)</span><span class="sr" data-l="en" lang="en"> (opens in a new tab)</span></a></li>
+        <li><a href="https://www.umcs.pl/pl/addres-book-employee,18763,pl.html" target="_blank" rel="noopener"><span data-l="pl" lang="pl">profil UMCS</span><span data-l="en" lang="en">UMCS profile</span> <span aria-hidden="true">↗</span><span class="sr" data-l="pl" lang="pl"> (otwiera się w nowej karcie)</span><span class="sr" data-l="en" lang="en"> (opens in a new tab)</span></a></li>
+        <li><a href="https://aiqedu.pl" target="_blank" rel="noopener">aiqedu.pl <span aria-hidden="true">↗</span><span class="sr" data-l="pl" lang="pl"> (otwiera się w nowej karcie)</span><span class="sr" data-l="en" lang="en"> (opens in a new tab)</span></a></li>
       </ul>
     </div>
   </section>
@@ -485,7 +480,7 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=58" defer></script>
-<script src="js/fx.js?v=58" defer></script>
+<script src="js/main.js?v=59" defer></script>
+<script src="js/fx.js?v=59" defer></script>
 </body>
 </html>
