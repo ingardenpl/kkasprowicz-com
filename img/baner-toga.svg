@@ -1,38 +1,59 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="600" height="300" role="img" aria-label="Robotyczna Temida z wagą">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="600" height="300" role="img" aria-label="Popiersie Temidy z przepaską na oczach i cybernetyczną szyją, jak na okładce książki Algorytm w todze">
 <defs>
 <filter id="g" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<radialGradient id="halo" cx=".5" cy=".5" r=".5"><stop offset=".6" stop-color="#34d399" stop-opacity="0"/><stop offset="1" stop-color="#34d399" stop-opacity=".18"/></radialGradient>
 <style>
-@keyframes sway{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
-@keyframes pan{0%,100%{transform:translateY(-5px)}50%{transform:translateY(5px)}}
-@keyframes panr{0%,100%{transform:translateY(5px)}50%{transform:translateY(-5px)}}
-@keyframes visor{0%,100%{opacity:.55}50%{opacity:1}}
-.beam{transform-origin:210px 78px;animation:sway 6s ease-in-out infinite}
-.panL{animation:pan 6s ease-in-out infinite}.panR{animation:panr 6s ease-in-out infinite}
-.visor{animation:visor 2.6s ease-in-out infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
+@keyframes flow{to{stroke-dashoffset:-120}}
+@keyframes shimmer{0%,100%{opacity:.5}50%{opacity:.95}}
+.ring{transform-origin:300px 98px;animation:spin 40s linear infinite}
+.cir{animation:pulse 3s ease-in-out infinite}
+.cir:nth-child(2n){animation-delay:-1.3s}
+.tr{stroke-dasharray:4 10;animation:flow 8s linear infinite}
+.band{animation:shimmer 4s ease-in-out infinite}
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
 </defs>
-<g fill="none" stroke="#34d399" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".8">
-  <!-- toga -->
-  <path d="M244 300 L256 150 C262 122 280 110 300 108 C320 110 338 122 344 150 L356 300"/>
-  <path d="M278 300 C272 240 274 190 290 124 M322 300 C328 240 326 190 310 124" stroke-opacity=".35"/>
-  <!-- głowa -->
-  <path d="M276 92 C276 52 324 52 324 92 C324 106 276 106 276 92 Z"/>
-  <path d="M292 96 V108 M308 96 V108" stroke-opacity=".5"/>
-  <!-- ramiona z przegubami -->
-  <path d="M258 150 L214 112 L210 78"/>
-  <path d="M342 150 L364 210 L360 262"/>
-  <path d="M360 262 V296 M350 260 H370" stroke-opacity=".6"/>
+<!-- krąg za głową -->
+<circle cx="300" cy="98" r="96" fill="url(#halo)"/>
+<circle cx="300" cy="98" r="92" fill="none" stroke="#34d399" stroke-opacity=".35" stroke-width="1"/>
+<circle class="ring" cx="300" cy="98" r="84" fill="none" stroke="#6ee7b7" stroke-opacity=".6" stroke-width="1" stroke-dasharray="40 180"/>
+<!-- ścieżki obwodów w tle -->
+<g class="tr" fill="none" stroke="#34d399" stroke-opacity=".35" stroke-width="1">
+  <path d="M60 60 H140 L170 90 H210"/><path d="M40 200 H120 L150 170 H190"/><path d="M540 70 H470 L440 100 H410"/><path d="M560 210 H480 L450 180 H410"/>
 </g>
-<g fill="#050807" stroke="#a7f3d0" stroke-width="1.2"><circle cx="214" cy="112" r="4"/><circle cx="258" cy="150" r="4"/><circle cx="364" cy="210" r="4"/><circle cx="342" cy="150" r="4"/></g>
-<!-- przepaska-wizjer i rdzeń -->
-<rect class="visor" x="276" y="72" width="48" height="7" rx="2" fill="#6ee7b7" filter="url(#g)"/>
-<circle cx="300" cy="162" r="4" fill="#ecfdf5" filter="url(#g)"/>
-<!-- waga zawieszona na dłoni (210,78) -->
-<g class="beam" filter="url(#g)">
-  <path d="M166 78 H254" stroke="#a7f3d0" stroke-width="2.2" stroke-linecap="round"/>
-  <circle cx="210" cy="78" r="3.5" fill="#ecfdf5"/>
-  <g class="panL" fill="none" stroke="#a7f3d0" stroke-width="1.1"><path d="M170 80 V122 M170 80 L152 122 M170 80 L188 122"/><path d="M146 122 Q170 140 194 122" stroke="#6ee7b7" stroke-width="1.4"/></g>
-  <g class="panR" fill="none" stroke="#a7f3d0" stroke-width="1.1"><path d="M250 80 V122 M250 80 L232 122 M250 80 L268 122"/><path d="M226 122 Q250 140 274 122" stroke="#6ee7b7" stroke-width="1.4"/></g>
+<g fill="#34d399" fill-opacity=".5"><rect x="56" y="56" width="8" height="8"/><rect x="36" y="196" width="8" height="8"/><rect x="536" y="66" width="8" height="8"/><rect x="556" y="206" width="8" height="8"/></g>
+<!-- popiersie -->
+<g fill="none" stroke="#34d399" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".85">
+  <!-- toga: ramiona, fałdy, drapowanie przez lewe ramię -->
+  <path d="M150 300 C160 240 200 212 258 200 L276 184 M324 184 L342 200 C400 212 440 240 450 300"/>
+  <path d="M258 200 C300 236 330 236 366 214 C390 250 404 272 410 300" stroke-opacity=".55"/>
+  <path d="M216 300 C222 262 236 236 258 222 M250 300 C254 272 262 252 282 236 M330 300 C326 262 322 246 318 236" stroke-opacity=".4"/>
+  <!-- szyja: mechaniczne cięgna -->
+  <path d="M280 150 C282 170 280 184 276 184 M320 150 C318 170 320 184 324 184"/>
+  <path d="M290 150 V182 M300 152 V184 M310 150 V182" stroke-opacity=".7"/>
+  <!-- głowa (marmur) i włosy upięte w kok -->
+  <path d="M258 98 C258 52 342 52 342 98 C342 128 324 150 300 152 C276 150 258 128 258 98 Z"/>
+  <path d="M262 84 C266 60 288 50 300 52 C318 50 336 60 338 84" stroke-opacity=".6"/>
+  <path d="M258 90 C248 74 250 60 262 62 C256 70 258 80 258 90 Z" stroke-opacity=".7"/>
+  <circle cx="252" cy="74" r="12" stroke-opacity=".7"/>
+  <!-- odsłonięta cybernetyczna część czaszki (lewa strona) -->
+  <path d="M262 70 C262 112 272 134 288 146" stroke-opacity=".5"/>
+  <path d="M266 92 H282 M268 104 H284 M272 116 H286 M278 128 H290" stroke-opacity=".6"/>
+  <!-- nos, usta -->
+  <path d="M300 104 L304 118 H296" stroke-opacity=".6"/>
+  <path d="M292 132 Q300 136 308 132" stroke-opacity=".6"/>
 </g>
+<!-- przepaska na oczach -->
+<path class="band" d="M254 96 C270 90 330 90 346 96 L346 108 C330 102 270 102 254 108 Z" fill="#6ee7b7" fill-opacity=".9" filter="url(#g)"/>
+<path d="M346 100 L360 86 M346 104 L362 110" stroke="#6ee7b7" stroke-width="1.2" stroke-opacity=".7" fill="none"/>
+<!-- punkty obwodów w czaszce i szyi -->
+<g fill="#a7f3d0" filter="url(#g)">
+  <circle class="cir" cx="266" cy="92" r="2"/><circle class="cir" cx="268" cy="104" r="2"/><circle class="cir" cx="272" cy="116" r="2"/><circle class="cir" cx="278" cy="128" r="2"/>
+  <circle class="cir" cx="290" cy="166" r="2"/><circle class="cir" cx="310" cy="166" r="2"/>
+</g>
+<!-- brosza spinająca togę -->
+<circle cx="262" cy="206" r="6" fill="none" stroke="#a7f3d0" stroke-width="1.4"/>
+<circle cx="262" cy="206" r="2" fill="#a7f3d0" filter="url(#g)"/>
 </svg>
