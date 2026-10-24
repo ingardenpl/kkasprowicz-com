@@ -357,3 +357,5 @@ html[data-lang="en"] .num::before{content:"MODULE"}
 /* v40: animowany baner kursu w wyróżnionej karcie */
 .course-banner{display:block;width:100%;height:auto;aspect-ratio:4/1;border-radius:12px;margin:0 0 20px;box-shadow:0 18px 40px -24px rgba(16,185,129,.45)}
 .course-feat::after{display:none}
+/* v43: banery projektów (AIQ, Algorytm w todze, HIL) w stylu banera kursu */
+.proj-banner{display:block;width:100%;height:auto;aspect-ratio:4/1;border-radius:12px;margin:-6px 0 18px;box-shadow:0 18px 40px -24px rgba(16,185,129,.45)}

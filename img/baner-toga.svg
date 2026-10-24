@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300" role="img" aria-labelledby="t d"><title id="t">Algorytm w todze</title><desc id="d">Animowany baner raportu „Algorytm w todze”: robotyczna Temida w szmaragdowej todze, z przepaską na oczach i wagą, która powoli się kołysze, na tle strumieni danych.</desc>
+<defs>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#020806"/><stop offset=".6" stop-color="#03211a"/><stop offset="1" stop-color="#053d2f"/></linearGradient>
+<linearGradient id="toga" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#10b981"/><stop offset="1" stop-color="#064e3b"/></linearGradient>
+<linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d1fae5"/><stop offset="1" stop-color="#34d399"/></linearGradient>
+<radialGradient id="halo" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#6ee7b7" stop-opacity=".5"/><stop offset="1" stop-color="#10b981" stop-opacity="0"/></radialGradient>
+<filter id="glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<style>
+@keyframes sway{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+@keyframes pan{0%,100%{transform:translateY(-6px)}50%{transform:translateY(6px)}}
+@keyframes panr{0%,100%{transform:translateY(6px)}50%{transform:translateY(-6px)}}
+@keyframes visor{0%,100%{opacity:.6}50%{opacity:1}}
+@keyframes stream{to{stroke-dashoffset:-400}}
+@keyframes core{0%,100%{r:5}50%{r:7}}
+.beam{transform-origin:600px 96px;animation:sway 6s ease-in-out infinite}
+.panL{animation:pan 6s ease-in-out infinite}.panR{animation:panr 6s ease-in-out infinite}
+.visor{animation:visor 2.4s ease-in-out infinite}
+.st{fill:none;stroke:#34d399;stroke-opacity:.5;stroke-width:1;stroke-dasharray:3 14;animation:stream 9s linear infinite}
+.core{animation:core 3s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</defs>
+<rect width="1200" height="300" fill="url(#sky)"/>
+<!-- strumienie danych w tle -->
+<g class="st"><path d="M80 0 V300 M160 0 V300 M260 0 V300 M940 0 V300 M1020 0 V300 M1120 0 V300"/><path d="M120 0 V300 M1080 0 V300" style="animation-delay:-4s"/></g>
+<ellipse cx="600" cy="170" rx="260" ry="150" fill="url(#halo)"/>
+<!-- Temida -->
+<g transform="translate(600,0)">
+  <!-- toga -->
+  <path d="M-70 300 L-56 150 C-50 120 -30 110 0 108 C30 110 50 120 56 150 L70 300 Z" fill="url(#toga)" stroke="#6ee7b7" stroke-opacity=".5"/>
+  <path d="M-30 300 C-20 230 -24 180 -8 120 M30 300 C20 230 22 180 8 120" fill="none" stroke="#a7f3d0" stroke-opacity=".35" stroke-width="1.2"/>
+  <!-- panele robota na torsie -->
+  <path d="M-28 150 L28 150 M-24 175 L24 175 M-20 200 L20 200" stroke="#a7f3d0" stroke-opacity=".5" stroke-width="1"/>
+  <circle class="core" cx="0" cy="162" r="5" fill="#ecfdf5" filter="url(#glow)"/>
+  <!-- szyja i głowa -->
+  <rect x="-8" y="96" width="16" height="16" fill="#064e3b" stroke="#34d399"/>
+  <path d="M-26 92 C-26 50 26 50 26 92 C26 108 -26 108 -26 92 Z" fill="#052a20" stroke="#34d399" stroke-width="1.4"/>
+  <path d="M-20 60 C-16 48 16 48 20 60" fill="none" stroke="#6ee7b7" stroke-width="1"/>
+  <!-- przepaska-wizjer -->
+  <rect class="visor" x="-27" y="70" width="54" height="10" rx="2" fill="#6ee7b7" filter="url(#glow)"/>
+  <!-- ramiona: lewe trzyma wagę, prawe opuszczone z przegubami -->
+  <path d="M-52 150 L-96 112 L-100 96" fill="none" stroke="#34d399" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="-96" cy="112" r="5" fill="#052a20" stroke="#a7f3d0"/><circle cx="-52" cy="150" r="5" fill="#052a20" stroke="#a7f3d0"/>
+  <path d="M52 150 L74 210 L70 250" fill="none" stroke="#34d399" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="74" cy="210" r="5" fill="#052a20" stroke="#a7f3d0"/><circle cx="52" cy="150" r="5" fill="#052a20" stroke="#a7f3d0"/>
+  <!-- miecz w prawej dłoni (ostrze w dół) -->
+  <path d="M70 250 L70 296" stroke="url(#metal)" stroke-width="4" stroke-linecap="round"/><path d="M58 248 H82" stroke="#a7f3d0" stroke-width="3" stroke-linecap="round"/>
+</g>
+<!-- waga: belka zawieszona na dłoni (600,96) -->
+<g class="beam" filter="url(#glow)">
+  <path d="M500 96 H600 H700" stroke="url(#metal)" stroke-width="3.5" stroke-linecap="round"/>
+  <circle cx="600" cy="96" r="5" fill="#ecfdf5"/>
+  <g class="panL"><path d="M504 98 V150 M504 98 L478 150 M504 98 L530 150" stroke="#a7f3d0" stroke-width="1.2" fill="none"/><path d="M470 150 Q504 172 538 150 Z" fill="#064e3b" stroke="#6ee7b7" stroke-width="1.4"/></g>
+  <g class="panR"><path d="M696 98 V150 M696 98 L670 150 M696 98 L722 150" stroke="#a7f3d0" stroke-width="1.2" fill="none"/><path d="M662 150 Q696 172 730 150 Z" fill="#064e3b" stroke="#6ee7b7" stroke-width="1.4"/></g>
+</g>
+<!-- tytuł -->
+<g font-family="Georgia,'Times New Roman',serif" fill="#ecfdf5">
+  <text x="60" y="140" font-size="54" font-weight="700" filter="url(#glow)">ALGORYTM</text>
+  <text x="60" y="200" font-size="54" font-weight="700" filter="url(#glow)">W TODZE</text>
+  <text x="62" y="236" font-size="15" font-family="Consolas,'Courier New',monospace" fill="#6ee7b7" letter-spacing="2">POSTAWY ZAWODÓW PRAWNICZYCH WOBEC AI</text>
+</g>
+<g font-family="Consolas,'Courier New',monospace" font-size="14" fill="#a7f3d0" opacity=".8" text-anchor="end"><text x="1140" y="262">WYDAWNICTWO UMCS · 2026</text></g>
+<rect width="1200" height="300" fill="none" stroke="#10b981" stroke-opacity=".35"/>
+</svg>

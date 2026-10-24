@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300" role="img" aria-labelledby="t d"><title id="t">Historical Imagination Lab</title><desc id="d">Animowany baner Historical Imagination Lab: z ekranu smartfona wyłania się hologram Zamku Lubelskiego — okrągła wieża-donżon i kaplica — w szmaragdowych liniach skanowania.</desc>
+<defs>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#020806"/><stop offset=".6" stop-color="#03211a"/><stop offset="1" stop-color="#053d2f"/></linearGradient>
+<linearGradient id="beamg" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#34d399" stop-opacity=".45"/><stop offset="1" stop-color="#34d399" stop-opacity="0"/></linearGradient>
+<linearGradient id="holo" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#6ee7b7"/><stop offset="1" stop-color="#a7f3d0"/></linearGradient>
+<filter id="glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<clipPath id="above"><rect x="0" y="0" width="1200" height="214"/></clipPath>
+<style>
+@keyframes hover{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes scan{0%{transform:translateY(0)}100%{transform:translateY(190px)}}
+@keyframes flicker{0%,100%{opacity:.85}47%{opacity:.95}50%{opacity:.6}53%{opacity:.95}}
+@keyframes rise{0%{transform:translateY(0);opacity:0}20%{opacity:.9}100%{transform:translateY(-170px);opacity:0}}
+@keyframes blink{0%,100%{opacity:.4}50%{opacity:1}}
+.castle{animation:hover 6s ease-in-out infinite,flicker 7s linear infinite}
+.scan{animation:scan 4s linear infinite}
+.p{fill:#a7f3d0;animation:rise 6s linear infinite}
+.led{animation:blink 2s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</defs>
+<rect width="1200" height="300" fill="url(#sky)"/>
+<g fill="#d1fae5" opacity=".7"><circle cx="90" cy="50" r="1.2"/><circle cx="210" cy="100" r="1"/><circle cx="300" cy="40" r="1"/><circle cx="930" cy="36" r="1.3"/><circle cx="1040" cy="90" r="1"/><circle cx="1130" cy="50" r="1.2"/></g>
+<!-- stożek światła z ekranu -->
+<path d="M560 214 L640 214 L760 30 L440 30 Z" fill="url(#beamg)" transform="translate(110,0)"/>
+<!-- hologram zamku (nad ekranem) -->
+<g clip-path="url(#above)" transform="translate(110,0)">
+<g class="castle" filter="url(#glow)" fill="none" stroke="url(#holo)" stroke-width="1.6" stroke-linejoin="round">
+  <!-- mur i brama -->
+  <path d="M470 214 V150 H730 V214"/>
+  <path d="M470 150 V140 H486 V150 M502 150 V140 H518 V150 M534 150 V140 H550 V150 M650 150 V140 H666 V150 M682 150 V140 H698 V150 M714 150 V140 H730 V150"/>
+  <path d="M588 214 V176 A12 12 0 0 1 612 176 V214"/>
+  <!-- donżon: okrągła wieża -->
+  <path d="M500 150 V60 M556 150 V60"/>
+  <path d="M494 60 H562 M494 60 V48 H506 V60 M518 60 V48 H530 V60 M542 60 V48 H554 V60"/>
+  <path d="M500 150 C512 142 544 142 556 150"/>
+  <rect x="522" y="84" width="12" height="18" rx="6"/>
+  <rect x="522" y="116" width="12" height="18" rx="6"/>
+  <!-- kaplica Trójcy Świętej: nawa z dwuspadowym dachem i sygnaturką -->
+  <path d="M620 150 V98 H706 V150"/>
+  <path d="M612 98 L663 52 L714 98"/>
+  <path d="M663 52 V36 M657 42 H669"/>
+  <path d="M636 150 V122 H652 V150 M674 150 V122 H690 V150"/>
+  <path d="M630 110 H642 M684 110 H696"/>
+  <!-- linie hologramu -->
+  <path d="M470 180 H730 M470 196 H730" stroke-opacity=".35"/>
+</g>
+<!-- linia skanowania -->
+<g class="scan"><rect x="440" y="24" width="320" height="2" fill="#a7f3d0" opacity=".8" filter="url(#glow)"/></g>
+<!-- cząstki -->
+<g><circle class="p" cx="500" cy="210" r="1.8" style="animation-delay:-1s"/><circle class="p" cx="560" cy="212" r="1.4" style="animation-delay:-3.4s"/><circle class="p" cx="620" cy="210" r="2" style="animation-delay:-5s"/><circle class="p" cx="690" cy="212" r="1.6" style="animation-delay:-2.2s"/><circle class="p" cx="730" cy="208" r="1.5" style="animation-delay:-4.1s"/></g>
+</g>
+<!-- smartfon w dłoni (dół) -->
+<g transform="translate(710,214)">
+  <rect x="-80" y="0" width="160" height="110" rx="18" fill="#031a14" stroke="#34d399" stroke-width="2"/>
+  <rect x="-70" y="8" width="140" height="94" rx="10" fill="#052a20"/>
+  <rect x="-70" y="8" width="140" height="94" rx="10" fill="url(#beamg)" opacity=".8"/>
+  <rect x="-18" y="2" width="36" height="4" rx="2" fill="#0a4a38"/>
+  <circle class="led" cx="0" cy="104" r="2.5" fill="#6ee7b7"/>
+  <!-- kciuki -->
+  <path d="M-96 60 C-110 70 -112 100 -96 110 H-80 V60 Z" fill="#064e3b" stroke="#34d399" stroke-opacity=".6"/>
+  <path d="M96 60 C110 70 112 100 96 110 H80 V60 Z" fill="#064e3b" stroke="#34d399" stroke-opacity=".6"/>
+</g>
+<!-- tytuł -->
+<g font-family="Georgia,'Times New Roman',serif" fill="#ecfdf5">
+  <text x="60" y="130" font-size="46" font-weight="700" filter="url(#glow)">HISTORICAL</text>
+  <text x="60" y="180" font-size="46" font-weight="700" filter="url(#glow)">IMAGINATION LAB</text>
+  <text x="62" y="214" font-size="15" font-family="Consolas,'Courier New',monospace" fill="#6ee7b7" letter-spacing="2">HISTORIA · GRY · NOWE TECHNOLOGIE</text>
+</g>
+<g font-family="Consolas,'Courier New',monospace" font-size="14" fill="#a7f3d0" opacity=".8" text-anchor="end"><text x="1140" y="262">SPIN-OFF UMCS · LUBLIN</text></g>
+<rect width="1200" height="300" fill="none" stroke="#10b981" stroke-opacity=".35"/>
+</svg>
