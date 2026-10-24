@@ -501,39 +501,120 @@
   /* 6. Karty projektów (AIQ, Algorytm w todze, HIL): dryfujące neurony łączące się w sieć,
         opcjonalnie z jednym symbolem kreślonym linią w środku (waga, zamek) */
   const symbols = {
-    // waga sprawiedliwości: belka na słupku, lekko się kołysze, dwie szale
-    scales(ctx, cx, cy, S, t, rgb) {
-      const a = live ? 0.07 * Math.sin(t * 0.9) : 0;
-      ctx.strokeStyle = `rgba(${rgb},.9)`; ctx.lineWidth = 1.4; ctx.lineCap = "round";
-      ctx.beginPath(); ctx.moveTo(cx, cy - S * 0.42); ctx.lineTo(cx, cy + S * 0.42); ctx.moveTo(cx - S * 0.16, cy + S * 0.42); ctx.lineTo(cx + S * 0.16, cy + S * 0.42); ctx.stroke();
-      const bx = Math.cos(a) * S * 0.46, by = Math.sin(a) * S * 0.46;
-      ctx.beginPath(); ctx.moveTo(cx - bx, cy - S * 0.42 - by); ctx.lineTo(cx + bx, cy - S * 0.42 + by); ctx.stroke();
-      for (const sgn of [-1, 1]) {
-        const px = cx + sgn * bx, py = cy - S * 0.42 + sgn * by, d = S * 0.26, w = S * 0.14;
-        ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(px - w, py + d); ctx.moveTo(px, py); ctx.lineTo(px + w, py + d); ctx.moveTo(px, py); ctx.lineTo(px, py + d); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(px - w * 1.2, py + d); ctx.quadraticCurveTo(px, py + d + w, px + w * 1.2, py + d); ctx.stroke();
+    // Temida: posąg obrócony z profilu (popiersie: głowa, szyja, ramiona, toga) jako chmura neuronów
+    // z siatką, obraca się wokół osi, punkty pulsują, fala rozjaśnienia przechodzi od dołu do góry;
+    // przepaska to jaśniejszy pierścień, obok w dłoni waga
+    themis(ctx, cx, cy, S, t, rgb, live, s) {
+      if (!s.th) {
+        const prof = (y) => {
+          if (y < 0.34) { const d = y - 0.17; return Math.sqrt(Math.max(0, 0.17 * 0.17 - d * d)) * (y < 0.06 ? 0.9 : 1); }
+          if (y < 0.42) return 0.07 + (y - 0.34) * 0.25;
+          if (y < 0.54) return 0.09 + (y - 0.42) * 2.9;
+          return 0.44 + (y - 0.54) * 0.15;
+        };
+        const pts = [], rings = [], links = [];
+        for (let i = 0; i <= 36; i++) {
+          const y = i / 36, r = prof(y), n = Math.max(6, Math.round(r * 56));
+          const ring = [];
+          for (let k = 0; k < n; k++) {
+            const a = (k / n) * 6.283 + (i % 2) * 0.1;
+            ring.push(pts.length);
+            pts.push({ x: Math.cos(a) * r, y, z: Math.sin(a) * r, ph: Math.random() * 6.283, band: y > 0.165 && y < 0.205 });
+          }
+          rings.push(ring);
+        }
+        for (let i = 0; i < rings.length; i++) {
+          const R = rings[i];
+          for (let k = 0; k < R.length; k++) {
+            links.push([R[k], R[(k + 1) % R.length]]);
+            if (i + 1 < rings.length) { const Q = rings[i + 1]; links.push([R[k], Q[Math.round((k / R.length) * Q.length) % Q.length]]); }
+          }
+        }
+        s.th = { pts, links };
       }
-      ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(cx, cy - S * 0.42, 2.4, 0, 6.283); ctx.fill();
-    },
-    // zamek: okrągła wieża-donżon z blankami i kaplica z dwuspadowym dachem, unoszące się jak hologram, z linią skanu
-    castle(ctx, cx, cy, S, t, rgb, live) {
-      const y0 = cy + S * 0.3 + (live ? Math.sin(t * 0.7) * S * 0.02 : 0);
-      ctx.strokeStyle = `rgba(${rgb},.9)`; ctx.lineWidth = 1.4; ctx.lineCap = "round"; ctx.lineJoin = "round";
-      const tw = S * 0.22, th = S * 0.62, tx = cx - S * 0.3;
+      const { pts, links } = s.th;
+      const ang = live ? t * 0.3 : 0.6, ca = Math.cos(ang), sa = Math.sin(ang);
+      const wave = live ? ((t * 0.22) % 1.3) - 0.15 : -1;
+      const P = (p) => {
+        const X = p.x * ca - p.z * sa, D = p.x * sa + p.z * ca;
+        return [cx + X * S * 0.95, cy + (p.y - 0.55) * S * 1.15, D];
+      };
+      const proj = pts.map(P);
+      // siatka: tylko ściany zwrócone do widza, przezroczystość wg głębi
+      ctx.lineWidth = 0.8;
+      ctx.strokeStyle = `rgba(${rgb},.28)`;
       ctx.beginPath();
-      ctx.moveTo(tx - tw / 2, y0); ctx.lineTo(tx - tw / 2, y0 - th); ctx.lineTo(tx + tw / 2, y0 - th); ctx.lineTo(tx + tw / 2, y0);
-      for (let i = 0; i < 3; i++) { const x = tx - tw / 2 + (i * tw) / 3; ctx.moveTo(x, y0 - th); ctx.lineTo(x, y0 - th - S * 0.07); ctx.lineTo(x + tw / 6, y0 - th - S * 0.07); ctx.lineTo(x + tw / 6, y0 - th); }
-      ctx.moveTo(tx - S * 0.025, y0 - th * 0.62); ctx.lineTo(tx - S * 0.025, y0 - th * 0.5); ctx.moveTo(tx - S * 0.025, y0 - th * 0.36); ctx.lineTo(tx - S * 0.025, y0 - th * 0.24);
-      const kx = cx + S * 0.16, kw = S * 0.34, kh = S * 0.3;
-      ctx.moveTo(kx - kw / 2, y0); ctx.lineTo(kx - kw / 2, y0 - kh); ctx.lineTo(kx, y0 - kh - S * 0.2); ctx.lineTo(kx + kw / 2, y0 - kh); ctx.lineTo(kx + kw / 2, y0);
-      ctx.moveTo(kx, y0 - kh - S * 0.2); ctx.lineTo(kx, y0 - kh - S * 0.3); ctx.moveTo(kx - S * 0.03, y0 - kh - S * 0.26); ctx.lineTo(kx + S * 0.03, y0 - kh - S * 0.26);
-      ctx.moveTo(kx - S * 0.05, y0); ctx.lineTo(kx - S * 0.05, y0 - kh * 0.5); ctx.lineTo(kx + S * 0.05, y0 - kh * 0.5); ctx.lineTo(kx + S * 0.05, y0);
-      ctx.moveTo(cx - S * 0.5, y0); ctx.lineTo(cx + S * 0.5, y0);
+      for (const [a, b] of links) { if (proj[a][2] + proj[b][2] < -0.2) continue; ctx.moveTo(proj[a][0], proj[a][1]); ctx.lineTo(proj[b][0], proj[b][1]); }
       ctx.stroke();
+      // neurony: pulsują, przepaska jaśniejsza, fala rozjaśnienia
+      for (let i = 0; i < pts.length; i++) {
+        const p = pts[i], [x, y, d] = proj[i];
+        const w = Math.exp(-((p.y - wave) ** 2) / 0.003);
+        const k = 0.5 + 0.5 * Math.sin(t * 1.5 + p.ph);
+        const a = Math.max(0, Math.min(1, 0.22 + 0.5 * (d / 0.5 + 0.5) * (0.6 + 0.4 * k) + w * 0.8));
+        ctx.globalAlpha = a; ctx.fillStyle = p.band ? "#ecfdf5" : `rgb(${rgb})`;
+        const r = (p.band ? 1.9 : 1.3) + 0.9 * k + w * 1.2;
+        ctx.beginPath(); ctx.arc(x, y, r, 0, 6.283); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      // waga w uniesionej dłoni (obraca się razem z posągiem)
+      const H = P({ x: 0.5, y: 0.3, z: 0.18 }), L = 0.26, sway = live ? 0.05 * Math.sin(t * 0.9) : 0;
+      const E1 = P({ x: 0.5, y: 0.3 - sway, z: 0.18 + L }), E2 = P({ x: 0.5, y: 0.3 + sway, z: 0.18 - L });
+      ctx.strokeStyle = `rgba(${rgb},.9)`; ctx.lineWidth = 1.3; ctx.lineCap = "round";
+      ctx.beginPath(); ctx.moveTo(E1[0], E1[1]); ctx.lineTo(E2[0], E2[1]); ctx.stroke();
+      for (const E of [E1, E2]) {
+        const d = S * 0.16, w = S * 0.07;
+        ctx.beginPath(); ctx.moveTo(E[0], E[1]); ctx.lineTo(E[0] - w, E[1] + d); ctx.moveTo(E[0], E[1]); ctx.lineTo(E[0] + w, E[1] + d); ctx.moveTo(E[0], E[1]); ctx.lineTo(E[0], E[1] + d); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(E[0] - w * 1.2, E[1] + d); ctx.quadraticCurveTo(E[0], E[1] + d + w, E[0] + w * 1.2, E[1] + d); ctx.stroke();
+      }
+      ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(H[0], H[1], 2.4, 0, 6.283); ctx.fill();
+    },
+    // Sokrates w Akademii Platońskiej: kolumnada z frontonem i schodami, Sokrates siedzi z uniesioną
+    // dłonią w geście rozmowy, naprzeciw dwóch słuchaczy; z jego głowy unoszą się impulsy myśli
+    academy(ctx, cx, cy, S, t, rgb, live) {
+      ctx.strokeStyle = `rgba(${rgb},.85)`; ctx.lineWidth = 1.3; ctx.lineCap = "round"; ctx.lineJoin = "round";
+      const base = cy + S * 0.32, top = cy - S * 0.26;
+      ctx.beginPath();
+      // schody
+      for (let i = 0; i < 3; i++) { const y = base + i * S * 0.05, w = S * (0.78 + i * 0.07); ctx.moveTo(cx - w, y); ctx.lineTo(cx + w, y); }
+      // kolumny z kapitelami
+      for (let i = -2; i <= 2; i++) {
+        const x = cx + i * S * 0.34, w = S * 0.03;
+        ctx.moveTo(x - w, base); ctx.lineTo(x - w, top + S * 0.05); ctx.moveTo(x + w, base); ctx.lineTo(x + w, top + S * 0.05);
+        ctx.moveTo(x - w * 1.8, top + S * 0.05); ctx.lineTo(x + w * 1.8, top + S * 0.05); ctx.moveTo(x - w * 1.8, top + S * 0.02); ctx.lineTo(x + w * 1.8, top + S * 0.02);
+      }
+      // belkowanie i fronton
+      ctx.moveTo(cx - S * 0.76, top + S * 0.02); ctx.lineTo(cx + S * 0.76, top + S * 0.02);
+      ctx.moveTo(cx - S * 0.76, top - S * 0.04); ctx.lineTo(cx + S * 0.76, top - S * 0.04);
+      ctx.moveTo(cx - S * 0.8, top - S * 0.04); ctx.lineTo(cx, top - S * 0.24); ctx.lineTo(cx + S * 0.8, top - S * 0.04);
+      ctx.stroke();
+      // Sokrates (siedzi po lewej, zwrócony w prawo) — głowa, broda, himation, uniesiona dłoń
+      const sx = cx - S * 0.22, sy = base - S * 0.02, h = S * 0.3;
+      ctx.beginPath();
+      ctx.arc(sx, sy - h * 0.82, h * 0.1, 0, 6.283);
+      ctx.moveTo(sx + h * 0.04, sy - h * 0.72); ctx.quadraticCurveTo(sx + h * 0.06, sy - h * 0.58, sx - h * 0.05, sy - h * 0.6); // broda
+      ctx.moveTo(sx - h * 0.1, sy - h * 0.66); ctx.quadraticCurveTo(sx - h * 0.26, sy - h * 0.5, sx - h * 0.3, sy); ctx.lineTo(sx + h * 0.34, sy); ctx.quadraticCurveTo(sx + h * 0.3, sy - h * 0.46, sx + h * 0.1, sy - h * 0.66); // himation
+      ctx.moveTo(sx + h * 0.12, sy - h * 0.42); ctx.quadraticCurveTo(sx + h * 0.3, sy - h * 0.5, sx + h * 0.44, sy - h * 0.74); // uniesione ramię
+      ctx.moveTo(sx + h * 0.44, sy - h * 0.74); ctx.lineTo(sx + h * 0.5, sy - h * 0.86); ctx.moveTo(sx + h * 0.44, sy - h * 0.74); ctx.lineTo(sx + h * 0.52, sy - h * 0.72); // dłoń
+      ctx.stroke();
+      // słuchacze (siedzą po prawej, zwróceni w lewo)
+      for (const [lx, sc] of [[cx + S * 0.18, 0.8], [cx + S * 0.38, 0.72]]) {
+        const hh = h * sc;
+        ctx.beginPath();
+        ctx.arc(lx, sy - hh * 0.8, hh * 0.09, 0, 6.283);
+        ctx.moveTo(lx + hh * 0.1, sy - hh * 0.64); ctx.quadraticCurveTo(lx + hh * 0.26, sy - hh * 0.46, lx + hh * 0.28, sy); ctx.lineTo(lx - hh * 0.3, sy); ctx.quadraticCurveTo(lx - hh * 0.26, sy - hh * 0.44, lx - hh * 0.1, sy - hh * 0.64);
+        ctx.stroke();
+      }
+      // impulsy myśli unoszące się z głowy Sokratesa w sieć
       if (live) {
-        const k = (t * 0.22) % 1, sy = y0 - th - S * 0.1 + k * (th + S * 0.1);
-        ctx.strokeStyle = `rgba(167,243,208,${(0.7 * Math.sin(k * Math.PI)).toFixed(2)})`; ctx.lineWidth = 1;
-        ctx.beginPath(); ctx.moveTo(cx - S * 0.52, sy); ctx.lineTo(cx + S * 0.52, sy); ctx.stroke();
+        for (let i = 0; i < 3; i++) {
+          const k = ((t * 0.25 + i / 3) % 1), x = sx + Math.sin(k * 6 + i) * S * 0.05, y = sy - h * 0.95 - k * S * 0.5;
+          ctx.globalAlpha = 0.8 * Math.sin(k * Math.PI);
+          ctx.drawImage(glow(false), x - 5, y - 5, 10, 10);
+        }
+        ctx.globalAlpha = 0.6 + 0.4 * Math.sin(t * 2);
+        ctx.drawImage(glow(false), sx - 7, sy - h * 0.82 - 7, 14, 14);
+        ctx.globalAlpha = 1;
       }
     },
   };
@@ -587,13 +668,13 @@
         if (p.r > 2.3) { ctx.globalAlpha = 0.35 + 0.45 * k; ctx.drawImage(sprite, p.x - 7, p.y - 7, 14, 14); }
       }
       ctx.globalAlpha = 1;
-      if (symbol) symbols[symbol](ctx, s.x0 + W * 0.5, s.cy, s.S, t, rgb, live);
+      if (symbol) symbols[symbol](ctx, s.x0 + W * 0.5, s.cy, s.S, t, rgb, live, s);
       ctx.globalCompositeOperation = "source-over";
     });
   }
   neuronCard("aiqFx");
-  neuronCard("togaFx", "scales");
-  neuronCard("hilFx", "castle");
+  neuronCard("togaFx", "themis");
+  neuronCard("hilFx", "academy");
 
   // Linie energii w SVG (CSS) — pauza poza ekranem
   const flow = document.querySelector(".flow");
