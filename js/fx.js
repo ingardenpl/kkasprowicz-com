@@ -499,69 +499,8 @@
   });
 
   /* 6. Karty projektów (AIQ, Algorytm w todze, HIL): dryfujące neurony łączące się w sieć,
-        opcjonalnie z symbolem w środku: obracający się posąg Temidy (themis) albo napis HISTORY z neuronów (history) */
+        opcjonalnie z symbolem w środku: napis HISTORY z neuronów (history) */
   const symbols = {
-    // Temida: posąg obrócony z profilu (popiersie: głowa, szyja, ramiona, toga) jako chmura neuronów
-    // z siatką, obraca się wokół osi, punkty pulsują, fala rozjaśnienia przechodzi od dołu do góry;
-    // przepaska to jaśniejszy pierścień
-    themis(ctx, cx, cy, S, t, rgb, live, s) {
-      if (!s.th) {
-        const prof = (y) => {
-          if (y < 0.34) { const d = y - 0.17; return Math.sqrt(Math.max(0, 0.17 * 0.17 - d * d)) * (y < 0.06 ? 0.9 : 1); }
-          if (y < 0.42) return 0.07 + (y - 0.34) * 0.25;
-          if (y < 0.54) return 0.09 + (y - 0.42) * 2.9;
-          return 0.44 + (y - 0.54) * 0.15;
-        };
-        const pts = [], rings = [], links = [];
-        for (let i = 0; i <= 36; i++) {
-          const y = i / 36, r = prof(y), n = Math.max(6, Math.round(r * 56));
-          const ring = [];
-          for (let k = 0; k < n; k++) {
-            const a = (k / n) * 6.283 + (i % 2) * 0.1;
-            ring.push(pts.length);
-            pts.push({ x: Math.cos(a) * r, y, z: Math.sin(a) * r, ph: Math.random() * 6.283, band: y > 0.165 && y < 0.205 });
-          }
-          rings.push(ring);
-        }
-        for (let i = 0; i < rings.length; i++) {
-          const R = rings[i];
-          for (let k = 0; k < R.length; k++) {
-            links.push([R[k], R[(k + 1) % R.length]]);
-            if (i + 1 < rings.length) { const Q = rings[i + 1]; links.push([R[k], Q[Math.round((k / R.length) * Q.length) % Q.length]]); }
-          }
-        }
-        s.th = { pts, links };
-      }
-      const { pts, links } = s.th;
-      const ang = live ? t * 0.3 : 0.6, ca = Math.cos(ang), sa = Math.sin(ang);
-      const wave = live ? 1.15 - ((t * 0.22) % 1.3) : -1; // od dołu (y=1) do góry (y=0)
-      const P = (p) => {
-        const X = p.x * ca - p.z * sa, D = p.x * sa + p.z * ca;
-        return [cx + X * S * 0.95, cy + (p.y - 0.55) * S * 1.15, D];
-      };
-      const proj = pts.map(P);
-      // siatka: krawędzie bledną wraz z głębią (trzy progi), tylne pomijane
-      ctx.lineWidth = 0.8;
-      const tiers = [[0.15, 0.3], [-0.2, 0.14], [-0.45, 0.06]];
-      for (let k = 0; k < tiers.length; k++) {
-        const [lo, al] = tiers[k], hi = k ? tiers[k - 1][0] : 9;
-        ctx.strokeStyle = `rgba(${rgb},${al})`;
-        ctx.beginPath();
-        for (const [a, b] of links) { const d = proj[a][2] + proj[b][2]; if (d < lo || d >= hi) continue; ctx.moveTo(proj[a][0], proj[a][1]); ctx.lineTo(proj[b][0], proj[b][1]); }
-        ctx.stroke();
-      }
-      // neurony: pulsują, przepaska jaśniejsza, fala rozjaśnienia
-      for (let i = 0; i < pts.length; i++) {
-        const p = pts[i], [x, y, d] = proj[i];
-        const w = Math.exp(-((p.y - wave) ** 2) / 0.003);
-        const k = 0.5 + 0.5 * Math.sin(t * 1.5 + p.ph);
-        const a = Math.max(0, Math.min(1, 0.22 + 0.5 * (d / 0.5 + 0.5) * (0.6 + 0.4 * k) + w * 0.8));
-        ctx.globalAlpha = a; ctx.fillStyle = p.band ? "#ecfdf5" : `rgb(${rgb})`;
-        const r = (p.band ? 1.9 : 1.3) + 0.9 * k + w * 1.2;
-        ctx.beginPath(); ctx.arc(x, y, r, 0, 6.283); ctx.fill();
-      }
-      ctx.globalAlpha = 1;
-    },
     // HISTORY: napis spróbkowany na punkty-neurony, które pulsują, mienią się przebiegającą falą
     // i łączą cienkimi liniami z sąsiadami
     history(ctx, cx, cy, S, t, rgb, live, s) {
@@ -658,8 +597,69 @@
     });
   }
   neuronCard("aiqFx");
-  neuronCard("togaFx", "themis");
   neuronCard("hilFx", "history");
+
+  /* 7. Algorytm w todze: sam znak paragrafu ułożony z punktów jak arkusz atlasu — delikatna liniatura
+        w tle, fala jasności przebiega przez znak, kilka ognisk pulsuje rozchodzącym się pierścieniem */
+  scene(document.getElementById("togaFx"), (s, w, h) => {
+    const mobile = w < 700;
+    s.x0 = mobile ? 0 : w * 0.42; s.x1 = w; s.y1 = mobile ? h * 0.62 : h;
+    s.cx = (s.x0 + s.x1) / 2; s.cy = s.y1 * (mobile ? 0.42 : 0.5);
+    s.S = Math.min(s.y1 * (mobile ? 0.62 : 0.78), (s.x1 - s.x0) * 0.62);
+    if (!s.pts) {
+      const build = () => {
+        const N = 220, STEP = 4, oc = document.createElement("canvas"); oc.width = oc.height = N;
+        const g = oc.getContext("2d", { willReadFrequently: true });
+        g.fillStyle = "#fff"; g.font = "700 236px Tinos, Georgia, 'Times New Roman', serif";
+        g.textAlign = "center"; g.textBaseline = "middle"; g.fillText("§", N / 2, N / 2 + 8);
+        const px = g.getImageData(0, 0, N, N).data, pts = [];
+        for (let y = 0; y < N; y += STEP) for (let x = 0; x < N; x += STEP)
+          if (px[(y * N + x) * 4 + 3] > 110) pts.push({ u: x / N - 0.5, v: y / N - 0.5, ph: Math.random() * 6.283 });
+        s.pts = pts;
+        // ogniska: kilka punktów znaku rozłożonych od góry do dołu
+        const sorted = [...pts].sort((p, q) => p.v - q.v);
+        s.hot = [0.08, 0.3, 0.55, 0.78, 0.95].map((k, i) => ({ ...sorted[Math.floor(k * (sorted.length - 1))], ph: i * 0.37 }));
+      };
+      build();
+      if (document.fonts) document.fonts.ready.then(build);
+    }
+  }, (ctx, s, w, h, t) => {
+    ctx.clearRect(0, 0, w, h);
+    if (!s.pts) return;
+    const rgb = "52,211,153", live = !reduced.matches; // karta jest czarna w obu motywach
+    const X = (p) => s.cx + p.u * s.S, Y = (p) => s.cy + p.v * s.S;
+    // liniatura jak w akcie prawnym: cienkie poziome linie za znakiem, wygaszone ku brzegom
+    const top = s.cy - s.S * 0.5, n = 11;
+    for (let i = 0; i <= n; i++) {
+      const y = top + (i / n) * s.S, half = s.S * 0.62;
+      const gr = ctx.createLinearGradient(s.cx - half, 0, s.cx + half, 0);
+      gr.addColorStop(0, `rgba(${rgb},0)`); gr.addColorStop(0.5, `rgba(${rgb},.16)`); gr.addColorStop(1, `rgba(${rgb},0)`);
+      ctx.strokeStyle = gr; ctx.lineWidth = 0.9;
+      ctx.beginPath(); ctx.moveTo(s.cx - half, y); ctx.lineTo(s.cx + half, y); ctx.stroke();
+    }
+    // punkty znaku: fala jasności przechodzi z góry na dół
+    ctx.fillStyle = `rgb(${rgb})`;
+    const d = Math.max(1.8, s.S / 105);
+    for (const p of s.pts) {
+      const wave = live ? Math.max(0, Math.sin(p.v * 7 - t * 0.9 + p.ph * 0.2)) : 0.45;
+      ctx.globalAlpha = 0.22 + 0.68 * wave;
+      ctx.fillRect(X(p) - d / 2, Y(p) - d / 2, d, d);
+    }
+    // ogniska z pierścieniem
+    const sprite = glow(false);
+    ctx.globalCompositeOperation = "lighter";
+    ctx.strokeStyle = `rgba(${rgb},.9)`; ctx.lineWidth = 1;
+    for (const o of s.hot) {
+      const x = X(o), y = Y(o);
+      ctx.globalAlpha = 0.85; ctx.drawImage(sprite, x - 7, y - 7, 14, 14);
+      if (live) {
+        const k = (t * 0.3 + o.ph) % 1;
+        ctx.globalAlpha = 0.45 * (1 - k);
+        ctx.beginPath(); ctx.arc(x, y, 4 + k * 20, 0, 6.283); ctx.stroke();
+      }
+    }
+    ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over";
+  });
 
   // Linie energii w SVG (CSS) — pauza poza ekranem
   const flow = document.querySelector(".flow");
