@@ -97,6 +97,20 @@
   addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
+  // Baner IB DP: slajdy 2+ dociągane dopiero, gdy baner jest blisko widoku; animacja pauzowana poza ekranem
+  document.querySelectorAll(".ib-banner").forEach((b) => {
+    const lazy = [...b.querySelectorAll("img[data-src]")];
+    if (!hasIO) { lazy.forEach((im) => { im.src = im.dataset.src; }); return; }
+    new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        b.classList.toggle("paused", !e.isIntersecting);
+        if (e.isIntersecting && lazy.length && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          lazy.splice(0).forEach((im) => { im.src = im.dataset.src; im.removeAttribute("data-src"); });
+        }
+      });
+    }, { rootMargin: "300px 0px" }).observe(b);
+  });
+
   if (!hasIO) return;
 
   // Aktywna sekcja w obu menu

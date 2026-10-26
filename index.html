@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Tinos:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Sans+3:wght@600&display=swap">
-<link rel="stylesheet" href="css/style.css?v=61">
+<link rel="stylesheet" href="css/style.css?v=64">
 </head>
 <body>
 <a class="skip" href="#main"><span data-l="pl" lang="pl">Przejdź do treści</span><span data-l="en" lang="en">Skip to content</span></a>
@@ -164,8 +164,7 @@
       <p class="num">03</p>
       <h2 id="s3-h"><span data-l="pl" lang="pl">Dydaktyka</span><span data-l="en" lang="en">Teaching</span></h2>
       <div class="tabs" role="tablist" aria-labelledby="s3-h">
-        <button role="tab" id="t-umcs" aria-controls="p-umcs" aria-selected="true">UMCS</button>
-        <button role="tab" id="t-ib" aria-controls="p-ib" aria-selected="false" tabindex="-1">IB DP · MYP History</button>
+        <button role="tab" id="t-umcs" aria-controls="p-umcs" aria-selected="true"><span data-l="pl" lang="pl">Kursy</span><span data-l="en" lang="en">Courses</span></button>
         <button role="tab" id="t-guest" aria-controls="p-guest" aria-selected="false" tabindex="-1"><span data-l="pl" lang="pl">Wykłady gościnne</span><span data-l="en" lang="en">Guest lectures</span></button>
       </div>
 
@@ -192,108 +191,43 @@
             <h3><span data-l="pl" lang="pl">Prawne podstawy organizacji i zarządzania zasobami ludzkimi w wymiarze sprawiedliwości i organach ścigania</span><span data-l="en" lang="en">Legal Foundations of Organisation and Human Resource Management in the Judiciary and Law Enforcement</span></h3>
           </li>
         </ul>
-      </div>
 
-      <div class="panel" role="tabpanel" id="p-ib" aria-labelledby="t-ib" tabindex="0" hidden>
-        <a class="ib-banner" href="/m28/" aria-label="IB DP History M28 — strona kursu (logowanie dla uczniów)" data-aria-pl="IB DP History M28 — strona kursu (logowanie dla uczniów)" data-aria-en="IB DP History M28 — course website (student sign-in)">
-          <svg viewBox="0 0 1200 340" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
-            <defs>
-              <linearGradient id="ibPaper" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFCF5"/><stop offset="1" stop-color="#EFE6D3"/></linearGradient>
-              <linearGradient id="ibWave" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#1F2A44"/><stop offset="1" stop-color="#1F2A44" stop-opacity=".35"/></linearGradient>
-              <linearGradient id="ibFade" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFFCF5" stop-opacity="0"/><stop offset=".55" stop-color="#FFFCF5" stop-opacity="0"/><stop offset="1" stop-color="#FFFCF5" stop-opacity="1"/></linearGradient>
-              <clipPath id="ibLeft"><rect x="0" y="0" width="640" height="340"/></clipPath>
-              <pattern id="ibGrain" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".6" fill="#2A2118" fill-opacity=".05"/></pattern>
-            </defs>
-            <rect width="1200" height="340" fill="url(#ibPaper)"/>
-            <rect width="1200" height="340" fill="url(#ibGrain)"/>
-            <!-- Katsushika Hokusai, „Wielka fala w Kanagawie” (ok. 1831), domena publiczna -->
-            <g clip-path="url(#ibLeft)"><image class="ib-img" href="img/great-wave.webp?v=1" x="-20" y="-40" width="680" height="480" preserveAspectRatio="xMidYMid slice"/><rect x="0" y="0" width="640" height="340" fill="url(#ibFade)"/></g>
-            <!-- wieża Kremla z gwiazdą, bordo -->
-            <g class="ib-tower" fill="none" stroke="#A31919" stroke-width="2" stroke-linejoin="round">
-              <path d="M1010 340 V214 H1066 V340"/>
-              <path d="M1002 214 H1074 M1010 214 V200 H1024 V214 M1038 214 V200 H1052 V214 M1066 214 V200 H1074 V214"/>
-              <path d="M1018 200 L1038 118 L1058 200 Z"/>
-              <path d="M1038 118 V96"/>
-              <path d="M1038 76 L1043 88 L1056 89 L1046 97 L1049 110 L1038 103 L1027 110 L1030 97 L1020 89 L1033 88 Z" fill="#A31919" stroke="none"/>
-              <rect x="1030" y="248" width="16" height="26" rx="8"/><rect x="1030" y="292" width="16" height="26" rx="8"/>
-            </g>
-            <!-- oś czasu -->
-            <g font-family="'Source Sans 3','Source Sans Pro',Inter,system-ui,sans-serif" font-size="15" font-weight="600" fill="#6C604E" letter-spacing="2">
-              <line x1="560" y1="262" x2="980" y2="262" stroke="#B9AD94" stroke-width="1.5"/>
-              <g fill="#8C1C28"><circle cx="560" cy="262" r="4"/><circle cx="700" cy="262" r="4"/><circle cx="840" cy="262" r="4"/><circle cx="980" cy="262" r="4"/></g>
-              <circle class="ib-dot" cx="560" cy="262" r="7" fill="#8C1C28" fill-opacity=".35"/>
-              <g class="ib-lab"><text x="560" y="292" text-anchor="middle">1853</text><text x="700" y="292" text-anchor="middle">1917</text><text x="840" y="292" text-anchor="middle">1945</text><text x="980" y="292" text-anchor="middle">2020</text></g>
-            </g>
-            <!-- tytuł -->
-            <g font-family="'Playfair Display',Georgia,'Times New Roman',serif" fill="#2A2118">
-              <text x="560" y="128" font-size="72" font-weight="900" letter-spacing="-1">IB DP <tspan font-weight="700" font-style="italic">History</tspan></text>
-              <text class="ib-sub" x="562" y="172" font-size="24" font-weight="700" fill="#A31919">Class M28 · new programme</text>
-              <text class="ib-sub" x="562" y="202" font-size="24" font-weight="700" fill="#A31919">first examination May 2028</text>
-            </g>
-            <g class="ib-lab" font-family="'Source Sans 3','Source Sans Pro',Inter,system-ui,sans-serif" font-size="17" font-weight="600" fill="#6C604E" letter-spacing="2">
-              <text x="562" y="234" data-l="pl" lang="pl">KURS DLA UCZNIÓW · PADEREWSKI · LUBLIN</text>
-              <text x="562" y="234" data-l="en" lang="en">STUDENT COURSE · PADEREWSKI · LUBLIN</text>
-            </g>
-            <rect x="0" y="0" width="1200" height="340" fill="none" stroke="#DDD2BC" stroke-width="2"/>
-            <g transform="translate(1110,60)"><rect x="0" y="0" width="56" height="56" rx="4" fill="#A31919"/><rect x="4" y="4" width="48" height="48" rx="2" fill="none" stroke="#FBF6EE" stroke-width="1.5" stroke-opacity=".8"/><text x="28" y="36" text-anchor="middle" font-family="'Playfair Display',Georgia,serif" font-size="20" font-weight="900" fill="#FBF6EE">M28</text></g>
-            <rect x="0" y="332" width="400" height="8" fill="#14544A"/><rect x="400" y="332" width="400" height="8" fill="#F3EBD8"/><rect x="800" y="332" width="400" height="8" fill="#A31919"/>
-          </svg>
-          <span class="ib-banner-cta"><span data-l="pl" lang="pl">Otwórz kurs</span><span data-l="en" lang="en">Open the course</span> <span aria-hidden="true">↗</span></span>
+        <p class="teach-k"><span data-l="pl" lang="pl">Międzynarodowe Liceum Paderewski w Lublinie</span><span data-l="en" lang="en">Paderewski International High School, Lublin</span></p>
+        <a class="ib-banner" href="/m28/login/" aria-label="Sign in to the course — IB DP History M28" data-aria-pl="Zaloguj się do kursu — IB DP History M28" data-aria-en="Sign in to the course — IB DP History M28">
+          <div class="ib-slides" aria-hidden="true">
+            <img src="img/ib/01-wave.webp?v=1" alt="" width="1200" height="846" loading="lazy" decoding="async">
+            <img data-src="img/ib/02-shiroyama.webp?v=1" alt="" width="1200" height="800" decoding="async">
+            <img data-src="img/ib/03-potemkin.webp?v=1" alt="" width="1200" height="800" decoding="async">
+            <img data-src="img/ib/04-lenin.webp?v=1" alt="" width="1200" height="800" decoding="async">
+            <img data-src="img/ib/05-redsquare.webp?v=1" alt="" width="1200" height="800" decoding="async">
+            <img data-src="img/ib/06-mao.webp?v=1" alt="" width="1200" height="800" decoding="async">
+            <img data-src="img/ib/07-cuba.webp?v=1" alt="" width="1200" height="800" decoding="async">
+            <img data-src="img/ib/08-sputnik.webp?v=1" alt="" width="1200" height="800" decoding="async">
+            <img data-src="img/ib/09-belovezha.webp?v=1" alt="" width="1200" height="800" decoding="async">
+          </div>
+          <div class="ib-shade" aria-hidden="true"></div>
+          <div class="ib-in">
+            <p class="ib-kick"><span data-l="pl" lang="pl">Rocznik M28 · nowy program · pierwsze egzaminy w maju 2028</span><span data-l="en" lang="en">Class M28 · new programme · first examination May 2028</span></p>
+            <p class="ib-title" lang="en">IB DP History, <em>examined.</em></p>
+            <p class="ib-lead"><span data-l="pl" lang="pl">Lekcje, źródła i ćwiczenia egzaminacyjne na cały dwuletni kurs IB DP w jednym miejscu.</span><span data-l="en" lang="en">Lessons, sources and exam practice for the whole two-year IB DP course, in one place.</span></p>
+            <span class="ib-cta"><span data-l="pl" lang="pl">Zaloguj się do kursu</span><span data-l="en" lang="en">Sign in to the course</span> <span aria-hidden="true">→</span></span>
+          </div>
         </a>
-        <p class="ib-link"><a class="link link-dark" href="/m28/"><span data-l="pl" lang="pl">Strona kursu dla uczniów</span><span data-l="en" lang="en">Course website for students</span> <span aria-hidden="true">→</span></a> <span class="ib-url">kkasprowicz.com/m28/</span></p>
-        <p class="panel-lede"><span data-l="pl" lang="pl">Międzynarodowe Liceum Paderewski w Lublinie — kursy IB Diploma Programme i Middle Years Programme History. W kursie DP równolegle działają dwa programy: przewodnik z 2020 roku (ostatnie egzaminy w 2027) i nowy przewodnik od rocznika M28.</span><span data-l="en" lang="en">Paderewski International High School, Lublin — IB Diploma Programme and Middle Years Programme History. Two DP programmes run side by side: the 2020 guide (final exams in 2027) and the new guide from the M28 cohort onwards.</span></p>
+        <p class="ib-link"><a class="link link-dark" href="/m28/#g22"><span data-l="pl" lang="pl">Przewodnik 2020 · rocznik M27</span><span data-l="en" lang="en">Guide 2020 · class M27</span> <span aria-hidden="true">→</span></a> <span class="ib-url"><span data-l="pl" lang="pl">ostatnie egzaminy w 2027 · materiały po zalogowaniu</span><span data-l="en" lang="en">final exams 2027 · materials after sign-in</span></span></p>
 
-        <article class="track track-new" id="ib-m28" aria-labelledby="ib-m28-h">
-          <div class="track-head">
-            <h3 id="ib-m28-h"><span data-l="pl" lang="pl">Nowy przewodnik · M28 i kolejne roczniki</span><span data-l="en" lang="en">New guide · M28 and later cohorts</span></h3>
-            <span class="badge"><span data-l="pl" lang="pl">egzaminy od 2028</span><span data-l="en" lang="en">first exams 2028</span></span>
+        <!-- IB MYP: link do materiałów dopisać, gdy będą gotowe (div → a z href) -->
+        <div class="ib-banner ib-myp">
+          <div class="ib-slides" aria-hidden="true">
+            <img src="img/ib/myp-coalbrookdale.webp?v=1" alt="" width="1400" height="895" loading="lazy" decoding="async">
           </div>
-          <div class="papers">
-            <div class="paper">
-              <p class="pnum">Paper 1</p>
-              <p class="pfocus"><span lang="en">Focused study 3: Political and economic transitions</span></p>
-              <ul><li><b>·</b><span><span lang="en">The Meiji Restoration, 1853–1894</span><small data-l="pl" lang="pl">Restauracja Meiji</small></span></li><li><b>·</b><span><span lang="en">The Russian Federation, 1985–1999</span><small data-l="pl" lang="pl">Federacja Rosyjska</small></span></li></ul>
-            </div>
-            <div class="paper">
-              <p class="pnum">Paper 2</p>
-              <p class="pfocus"><span lang="en">Thematic study 3: Authoritarian rule</span></p>
-              <ul><li><b>·</b><span><span lang="en">Lenin</span><small data-l="pl" lang="pl">Europa</small><small data-l="en" lang="en">Europe</small></span></li><li><b>·</b><span><span lang="en">Mao</span><small data-l="pl" lang="pl">Azja</small><small data-l="en" lang="en">Asia</small></span></li><li><b>·</b><span><span lang="en">Castro</span><small data-l="pl" lang="pl">Ameryki</small><small data-l="en" lang="en">Americas</small></span></li></ul>
-            </div>
-            <div class="paper">
-              <p class="pnum">Paper 3 <span><span data-l="pl" lang="pl">tylko HL</span><span data-l="en" lang="en">HL only</span></span></p>
-              <p class="pfocus"><span data-l="pl" lang="pl">Europa</span><span data-l="en" lang="en">Europe</span></p>
-              <ul><li><b>RS7</b><span><span lang="en">The Russian Revolution, 1855–1924</span><small data-l="pl" lang="pl">Rewolucja rosyjska</small></span></li><li><b>RS11</b><span><span lang="en">The USSR and post-Soviet Russia, 1945–2020</span><small data-l="pl" lang="pl">ZSRR i Rosja postradziecka</small></span></li></ul>
-            </div>
+          <div class="ib-shade" aria-hidden="true"></div>
+          <div class="ib-in">
+            <p class="ib-kick" lang="en">IB Middle Years Programme</p>
+            <p class="ib-title"><span lang="en">IB MYP History,</span> <em><span data-l="pl" lang="pl">wybrane materiały.</span><span data-l="en" lang="en">selected materials.</span></em></p>
+            <span class="ib-cta ib-soon"><span data-l="pl" lang="pl">W przygotowaniu</span><span data-l="en" lang="en">Coming soon</span></span>
           </div>
-          <!-- Miejsce na kurs M28 (budowany w osobnej sesji: Paderewski/IB DP Materiały/kurs-m28) -->
-          <div class="course-slot" id="kurs-m28">
-            <span class="dot" aria-hidden="true"></span>
-            <p><span data-l="pl" lang="pl"><strong>Kurs online dla uczniów — w przygotowaniu.</strong> Lekcje, karty pracy i materiały do pobrania pojawią się tutaj.</span><span data-l="en" lang="en"><strong>Online course for students — in preparation.</strong> Lessons, worksheets and downloadable materials will appear here.</span></p>
-          </div>
-        </article>
-
-        <article class="track" id="ib-m27" aria-labelledby="ib-m27-h">
-          <div class="track-head">
-            <h3 id="ib-m27-h"><span data-l="pl" lang="pl">Przewodnik 2020 · rocznik M27</span><span data-l="en" lang="en">2020 guide · M27 cohort</span></h3>
-            <span class="badge badge-old"><span data-l="pl" lang="pl">ostatnie egzaminy 2027</span><span data-l="en" lang="en">final exams 2027</span></span>
-          </div>
-          <div class="papers">
-            <div class="paper">
-              <p class="pnum">Paper 1</p>
-              <ul><li><b>3</b><span><span lang="en">The Move to Global War</span><small data-l="pl" lang="pl">Droga do wojny światowej</small></span></li></ul>
-            </div>
-            <div class="paper">
-              <p class="pnum">Paper 2</p>
-              <ul><li><b>10</b><span><span lang="en">Authoritarian States</span><small data-l="pl" lang="pl">Państwa autorytarne</small></span></li><li><b>12</b><span><span lang="en">The Cold War</span><small data-l="pl" lang="pl">Zimna wojna</small></span></li></ul>
-            </div>
-            <div class="paper">
-              <p class="pnum">Paper 3 <span><span data-l="pl" lang="pl">tylko HL</span><span data-l="en" lang="en">HL only</span></span></p>
-              <ul><li><b>12</b><span><span lang="en">Imperial Russia and Revolutions, 1855–1924</span><small data-l="pl" lang="pl">Rosja carska i rewolucje, 1855–1924</small></span></li><li><b>14</b><span><span lang="en">Interwar States</span><small data-l="pl" lang="pl">Państwa okresu międzywojennego</small></span></li><li><b>16</b><span><span lang="en">Soviet Union and Post-Soviet Russia, 1924–2000</span><small data-l="pl" lang="pl">Związek Radziecki i Rosja postradziecka, 1924–2000</small></span></li></ul>
-            </div>
-          </div>
-        </article>
-
-        <p class="note"><span data-l="pl" lang="pl">Prowadzę także kurs IB MYP History.</span><span data-l="en" lang="en">I also teach IB MYP History.</span></p>
+          <p class="ib-credit">Ph. J. de Loutherbourg, <i lang="en">Coalbrookdale by Night</i>, 1801 · <span data-l="pl" lang="pl">domena publiczna</span><span data-l="en" lang="en">public domain</span></p>
+        </div>
       </div>
 
       <div class="panel" role="tabpanel" id="p-guest" aria-labelledby="t-guest" tabindex="0" hidden>
@@ -480,7 +414,7 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=61" defer></script>
-<script src="js/fx.js?v=61" defer></script>
+<script src="js/main.js?v=64" defer></script>
+<script src="js/fx.js?v=64" defer></script>
 </body>
 </html>
