@@ -92,9 +92,9 @@ html[data-lang="en"] .num::before{content:"MODULE"}
 .flow .f3{animation-duration:15s;animation-delay:-7s}
 .flow .f4{animation-duration:11s;animation-delay:-5s;stroke-width:.7}
 @keyframes flow{from{stroke-dashoffset:1580}to{stroke-dashoffset:0}}
-.sec-dark::before{content:"";position:absolute;inset:0;z-index:-2;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1.2px);background-size:26px 26px;-webkit-mask-image:radial-gradient(70% 70% at 50% 50%,#000,transparent)}
+.sec-dark::before{content:"";position:absolute;inset:0;z-index:-2;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1.2px);background-size:26px 26px;-webkit-mask-image:radial-gradient(70% 70% at 50% 50%,#000,transparent);mask-image:radial-gradient(70% 70% at 50% 50%,#000,transparent)}
 
-.cards{display:grid;mask-image:radial-gradient(70% 70% at 50% 50%,#000,transparent)}
+.cards{display:grid;gap:18px}
 
 .cards{display:grid;gap:18px}
 .card{position:relative;padding:28px 24px 26px;border-radius:16px;border:1px solid var(--line);background:linear-gradient(160deg,rgba(255,255,255,.045),rgba(255,255,255,.01));transition:border-color .3s,transform .3s,box-shadow .3s}
@@ -425,3 +425,8 @@ a.ib-banner:hover .ib-cta{background:#F4DDAA}
 .ib-myp{margin-top:34px}
 @media (max-width:560px){.ib-credit{position:relative;order:-1;right:auto;top:auto;max-width:none;padding:12px 16px 0;text-align:left}}
 @media (prefers-reduced-motion:reduce){.ib-slides img,.ib-myp .ib-slides img{animation:none}.ib-slides img:not(:first-child){display:none}a.ib-banner:hover{transform:none}}
+
+/* ——— v65: czytelniejsze karty w „Badaniach” ——— */
+.sec-dark .card{background:linear-gradient(160deg,rgba(255,255,255,.065),rgba(255,255,255,.02))}
+.sec-dark .card h3{color:#fff}
+.sec-dark .card p{color:#d3dcd7}
