@@ -97,6 +97,31 @@
   addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
+  // Prawo Hicka: długie listy (publikacje, tłumaczenia, konferencje) pokazują 5 pozycji, reszta po kliknięciu
+  document.querySelectorAll("#publikacje .pubs, #publikacje .clist").forEach((list, n) => {
+    const items = [...list.children];
+    if (items.length <= 6) return;
+    const extra = items.slice(5);
+    if (!list.id) list.id = "list-" + n;
+    const btn = document.createElement("button");
+    btn.type = "button"; btn.className = "more-btn"; btn.setAttribute("aria-controls", list.id);
+    const label = (open) => open
+      ? '<span data-l="pl" lang="pl">Pokaż mniej</span><span data-l="en" lang="en">Show fewer</span> <span aria-hidden="true">↑</span>'
+      : '<span data-l="pl" lang="pl">Pokaż wszystkie (' + items.length + ')</span><span data-l="en" lang="en">Show all (' + items.length + ')</span> <span aria-hidden="true">↓</span>';
+    const set = (open) => {
+      extra.forEach((el) => { el.hidden = !open; });
+      btn.setAttribute("aria-expanded", String(open));
+      btn.innerHTML = label(open);
+    };
+    btn.addEventListener("click", () => {
+      const open = btn.getAttribute("aria-expanded") !== "true";
+      set(open);
+      if (!open) btn.scrollIntoView({ block: "nearest" });
+    });
+    set(false);
+    list.after(btn);
+  });
+
   // Baner IB DP: slajdy 2+ dociągane dopiero, gdy baner jest blisko widoku; animacja pauzowana poza ekranem
   document.querySelectorAll(".ib-banner").forEach((b) => {
     const lazy = [...b.querySelectorAll("img[data-src]")];
@@ -125,6 +150,11 @@
     });
   }, { rootMargin: "-45% 0px -50% 0px" });
   new Set(links.map((a) => a.getAttribute("href").slice(1)).concat("hero")).forEach((id) => { const s = document.getElementById(id); if (s) spy.observe(s); });
+  // ostatnia sekcja jest krótka: na samym dole strony aktywny jest Kontakt
+  addEventListener("scroll", () => {
+    if (innerHeight + scrollY < document.documentElement.scrollHeight - 4) return;
+    links.forEach((l) => { if (l.getAttribute("href") === "#kontakt") l.setAttribute("aria-current", "true"); else l.removeAttribute("aria-current"); });
+  }, { passive: true });
 
   // Odsłanianie elementów przy przewijaniu
   // przy animacjach sprzężonych z przewijaniem (CSS animation-timeline) stare odsłanianie jest zbędne

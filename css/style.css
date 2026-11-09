@@ -430,3 +430,17 @@ a.ib-banner:hover .ib-cta{background:#F4DDAA}
 .sec-dark .card{background:linear-gradient(160deg,rgba(255,255,255,.065),rgba(255,255,255,.02))}
 .sec-dark .card h3{color:#fff}
 .sec-dark .card p{color:#d3dcd7}
+
+/* ——— v66: prawo Hicka — mniej wyborów naraz ——— */
+/* długie listy: przycisk „pokaż wszystkie” */
+.more-btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-top:14px;padding:0 16px;border:1px solid var(--mute);border:1px solid color-mix(in srgb,var(--accent) 55%,transparent);border-radius:999px;background:none;color:var(--accent);font:600 .8125rem/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:border-color .18s,background .18s,transform .18s}
+.more-btn:hover{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.more-btn:active{transform:scale(.97)}
+.more-btn + .note{margin-top:14px}
+/* kursy bez strony nie udają klikalnych kart */
+#p-umcs .course:not(:has(a)):hover::after{transform:scaleY(0)}
+#p-umcs .course:not(:has(a)){background:none}
+/* baner MYP (jeszcze bez linku) jest niższy, żeby nie konkurował z banerem IB DP */
+.ib-myp{min-height:clamp(200px,20vw,250px)}
+.ib-myp .ib-title{font-size:clamp(1.6rem,3.6vw,2.6rem)}
+@media (prefers-reduced-motion:reduce){.more-btn:active{transform:none}}
